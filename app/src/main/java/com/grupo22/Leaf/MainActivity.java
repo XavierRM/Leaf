@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.grupo22.Leaf.module.adapter.DecksAdapter;
 import com.grupo22.Leaf.module.presenter.DecksPresenter;
 import com.grupo22.Leaf.module.presenter.DecksPresenterImp;
 import com.grupo22.Leaf.module.presenter.DecksView;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
     RecyclerView mRecycler;
     TextView mEmptyView;
 
-    //private DeckAdapter mAdapter;
+    private DecksAdapter mAdapter;
 
     private DecksPresenter mPresenter;
 
@@ -44,13 +45,13 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(linearLayoutManager);
 
-        //mAdapter = new ArtistAdapter();
-        //mRecycler.setAdapter(mAdapter);
+        mAdapter = new DecksAdapter();
+        mRecycler.setAdapter(mAdapter);
     }
 
     @Override
     public void showDecks(List<DeckViewModel> decks) {
-        //mAdapter.setItems(decks);
+        mAdapter.setItems(decks);
         mEmptyView.setVisibility(View.GONE);
         mRecycler.setVisibility(View.VISIBLE);
     }
@@ -69,6 +70,6 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
     @Override
     public void updateDeck(DeckViewModel deck, int position) {
-        //mAdapter.updateItem(deck, position);
+        mAdapter.updateItem(deck, position);
     }
 }
