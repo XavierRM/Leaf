@@ -14,20 +14,12 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class Deck {
 
-    private String id;
     private String title;
     private String category;
     private final LocalDate creationDate;
     private LocalDate lastUpdate;
     private String lang;
     private List<Question> questions;
-
-    public Deck(String id, String title) {
-        this.id = id;
-        this.title = title;
-        this.creationDate = LocalDate.now();
-        this.lastUpdate = LocalDate.now();
-    }
 
     public Deck(String title, String category, String lang, List<Question> questions) {
         this.title = title;
@@ -49,16 +41,6 @@ public class Deck {
 
     private void updateLastDateTime(){
         this.lastUpdate = LocalDate.now();
-    }
-
-    public String getId() {
-        updateLastDateTime();
-        return id;
-    }
-
-    public void setId(String id) {
-        updateLastDateTime();
-        this.id = id;
     }
 
     public String getTitle() {
