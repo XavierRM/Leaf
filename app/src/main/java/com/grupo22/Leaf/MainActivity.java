@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.grupo22.Leaf.domain.deck.Deck;
 import com.grupo22.Leaf.module.adapter.DecksAdapter;
 import com.grupo22.Leaf.module.presenter.DecksPresenter;
 import com.grupo22.Leaf.module.presenter.DecksPresenterImp;
@@ -55,7 +57,10 @@ public class MainActivity extends AppCompatActivity implements DecksView {
             @Override
             public void onClick(View view, int position) {
                 //mPresenter.onClickDeck(mAdapter.getItem(position));
-                Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_SHORT).show();
+                DeckViewModel deckViewModel = mAdapter.getItem(position);
+
+                //Here we would create the intent and pass the deck
+                Log.d("_TAG", "The deck selected is the following:\n" + deckViewModel.getTitle() + "\n" + deckViewModel.getId());
             }
         });
     }
