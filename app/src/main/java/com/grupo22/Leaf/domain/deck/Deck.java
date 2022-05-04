@@ -14,15 +14,15 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class Deck {
 
-    private String tittle;
+    private String title;
     private String category;
     private final LocalDate creationDate;
     private LocalDate lastUpdate;
     private String lang;
     private List<Question> questions;
 
-    public Deck(String tittle, String category, String lang, List<Question> questions) {
-        this.tittle = tittle;
+    public Deck(String title, String category, String lang, List<Question> questions) {
+        this.title = title;
         this.category = category;
         this.lang = lang;
         this.questions = questions;
@@ -30,18 +30,27 @@ public class Deck {
         this.lastUpdate = LocalDate.now();
     }
 
+    public Deck(String title, String category, LocalDate creationDate, LocalDate lastUpdate,String lang, List<Question> questions) {
+        this.title = title;
+        this.category = category;
+        this.lang = lang;
+        this.questions = questions;
+        this.creationDate = creationDate;
+        this.lastUpdate = lastUpdate;
+    }
+
     private void updateLastDateTime(){
         this.lastUpdate = LocalDate.now();
     }
 
-    public String getTittle() {
+    public String getTitle() {
         updateLastDateTime();
-        return tittle;
+        return title;
     }
 
-    public void setTittle(String tittle) {
+    public void setTittle(String title) {
         updateLastDateTime();
-        this.tittle = tittle;
+        this.title = title;
     }
 
     public String getCategory() {
@@ -72,5 +81,13 @@ public class Deck {
     public void setQuestions(List<Question> questions) {
         updateLastDateTime();
         this.questions = questions;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public LocalDate getLastUpdate() {
+        return lastUpdate;
     }
 }
