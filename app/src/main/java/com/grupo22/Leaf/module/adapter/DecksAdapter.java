@@ -5,79 +5,95 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.grupo22.Leaf.R;
 import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
 
-public class DecksAdapter extends Adapter<DecksAdapter.DeckHolder> {
+import java.util.ArrayList;
+import java.util.List;
 
-    private List<DeckViewModel> mItems;
+public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.DeckHolder> {
 
-    public DecksAdapter() {
+    private List<DeckViewModel> mDataset;
+    private static OnItemClickListener clickListener;
 
-        mItems = new ArrayList<>();
+    public interface OnItemClickListener {
+        public void onClick(View view, int position);
     }
 
-    public void setItems(List<DeckViewModel> items) {
+    public static class DeckHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public TextView title, id;
+        public DeckHolder(View view) {
+            super(view);
+            title = view.findViewById(R.id.deck_title);
+            id = view.findViewById(R.id.deck_id);
+            view.setOnClickListener(this);
+        }
+        public void bind(DeckViewModel deckViewModel) {
+            title.setText(deckViewModel.getTitle());
+            id.setText(deckViewModel.getId());
+        }
 
-        mItems = items;
-        notifyDataSetChanged();
+        @Override
+        public void onClick(View view) {
+            if(clickListener != null) {
+                clickListener.onClick(view, getAdapterPosition());
+            }
+        }
+
+    }
+    public DecksAdapter() {
+
+        mDataset = new ArrayList<>();
+    }
+
+    public void setClickListener(OnItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
+
+    @NonNull
+    @Override
+    public DecksAdapter.DeckHolder onCreateViewHolder(ViewGroup parent,
+                                                      int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.row_deck, parent, false);
+        return new DeckHolder(v);
+    }
+    @Override
+    public void onBindViewHolder(DeckHolder holder, int position) {
+        holder.bind(mDataset.get(position));
+    }
+    @Override
+    public int getItemCount() {
+        return mDataset.size();
+    }
+
+    public void addItem(DeckViewModel deckViewModel) {
+        mDataset.add(deckViewModel);
+        notifyItemInserted(mDataset.size());
+    }
+
+    public void removeItem(int position) {
+        mDataset.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public DeckViewModel getItem(int position) {
+        return mDataset.get(position);
+    }
+
+    public void setItems(List<DeckViewModel> deck) {
+        mDataset = deck;
     }
 
     public void updateItem(DeckViewModel item,
                            int position) {
 
-        mItems.add(position, item);
+        mDataset.add(position, item);
         notifyItemChanged(position);
     }
 
-    @NonNull
-    @Override
-    public DecksAdapter.DeckHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                         int viewType) {
-
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_deck, parent, false);
-        return new DeckHolder(v);
-    }
-
-    @Override
-    public int getItemCount() {
-
-        return mItems.size();
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull DecksAdapter.DeckHolder holder,
-                                 int position) {
-
-        holder.bind(mItems.get(position));
-    }
-
-    static class DeckHolder extends RecyclerView.ViewHolder {
-
-        private TextView mTvId;
-        private TextView mTvTitle;
-
-        private DeckHolder(View v) {
-
-            super(v);
-            mTvId = v.findViewById(R.id.row_deck_id);
-            mTvTitle = v.findViewById(R.id.row_deck_title);
-        }
-
-        private void bind(DeckViewModel deck) {
-
-            mTvId.setText("-");
-            String name = deck.getTitle();
-
-            mTvTitle.setText(name);
-        }
-    }
 
 }
