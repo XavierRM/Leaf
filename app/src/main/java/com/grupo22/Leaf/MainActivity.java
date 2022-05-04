@@ -1,9 +1,11 @@
 package com.grupo22.Leaf;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecycler = findViewById(R.id.artists_list);
+        mRecycler = findViewById(R.id.decks_list);
         mEmptyView = findViewById(R.id.artists_empty_list);
 
         setUpView();
@@ -47,6 +49,15 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
         mAdapter = new DecksAdapter();
         mRecycler.setAdapter(mAdapter);
+
+        mAdapter.setClickListener(new DecksAdapter.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view, int position) {
+                //mPresenter.onClickDeck(mAdapter.getItem(position));
+                Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

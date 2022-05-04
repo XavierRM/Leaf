@@ -1,10 +1,13 @@
 package com.grupo22.Leaf.module.presenter;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.grupo22.Leaf.R;
 import com.grupo22.Leaf.domain.deck.Deck;
 import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
 import com.grupo22.Leaf.module.viewmodel.DecksViewModelMapper;
@@ -26,13 +29,13 @@ public class DecksPresenterImp implements DecksPresenter {
     @Override
     public void initFlow() {
 
-        //Get the decks
+        new GetDecksTask().execute();
 
     }
 
     @Override
-    public void onClickDeck() {
-
+    public void onClickDeck(DeckViewModel deck) {
+        Toast.makeText((Context) decksView, R.string.error_general, Toast.LENGTH_SHORT).show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -44,10 +47,16 @@ public class DecksPresenterImp implements DecksPresenter {
 
     private class GetDecksTask extends AsyncTask<String, Void, List<Deck>> {
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         protected List<Deck> doInBackground(String... textToSearch) {
 
-            //Here we would return the list of decks
-            return new ArrayList<>();
+            List<Deck> decks = new ArrayList<>();
+
+            for(int i = 0; i < 100; i++) {
+                decks.add(new Deck(Integer.toString(i), ("Decks number " + i)));
+            }
+
+            return decks;
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
