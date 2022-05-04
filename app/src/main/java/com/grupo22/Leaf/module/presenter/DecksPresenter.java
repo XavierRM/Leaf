@@ -1,6 +1,6 @@
 package com.grupo22.Leaf.module.presenter;
 
-public interface DeckPresenter {
+public interface DecksPresenter {
 
     void initFlow();
 

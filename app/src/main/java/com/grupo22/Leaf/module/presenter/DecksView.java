@@ -4,7 +4,7 @@ import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
 
 import java.util.List;
 
-public interface DeckView {
+public interface DecksView {
 
     void showDecks(List<DeckViewModel> decks);
 

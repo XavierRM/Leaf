@@ -12,15 +12,15 @@ import com.grupo22.Leaf.module.viewmodel.DecksViewModelMapper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeckPresenterImp implements DeckPresenter{
+public class DecksPresenterImp implements DecksPresenter {
 
-    private DeckView deckView;
+    private DecksView decksView;
 
     private List<DeckViewModel> mDecksViewModels;
 
-    public DeckPresenterImp(DeckView view) {
+    public DecksPresenterImp(DecksView view) {
 
-        deckView = view;
+        decksView = view;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class DeckPresenterImp implements DeckPresenter{
         protected void onPostExecute(List<Deck> result) {
 
             mDecksViewModels = getDecksViewModel(result);
-            deckView.showDecks(mDecksViewModels);
+            decksView.showDecks(mDecksViewModels);
         }
     }
 }
