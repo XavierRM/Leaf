@@ -89,8 +89,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
     @Override
     public void showError() {
-        Toast.makeText(this, R.string.error_general, Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, R.string.general_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

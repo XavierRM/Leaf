@@ -35,7 +35,7 @@ public class DecksPresenterImp implements DecksPresenter {
 
     @Override
     public void onClickDeck(DeckViewModel deck) {
-        Toast.makeText((Context) decksView, R.string.error_general, Toast.LENGTH_SHORT).show();
+        Toast.makeText((Context) decksView, R.string.general_error, Toast.LENGTH_SHORT).show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -53,7 +53,7 @@ public class DecksPresenterImp implements DecksPresenter {
             List<Deck> decks = new ArrayList<>();
 
             for(int i = 0; i < 100; i++) {
-                decks.add(new Deck(Integer.toString(i), ("Decks number " + i)));
+                decks.add(new Deck(Integer.toString(i), (((Context) decksView).getApplicationContext().getString(R.string.decks_number) + " " + i)));
             }
 
             return decks;

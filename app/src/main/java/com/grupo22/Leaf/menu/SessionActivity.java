@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.grupo22.Leaf.R;
 import com.grupo22.Leaf.menu.presenter.SessionPresenter;
@@ -74,6 +75,6 @@ public class SessionActivity extends AppCompatActivity implements SessionView {
 
     @Override
     public void showError() {
-
+        Toast.makeText(this, R.string.general_error, Toast.LENGTH_SHORT).show();
     }
 }
