@@ -1,16 +1,22 @@
 package com.grupo22.Leaf.domain.deck;
 
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
 import com.grupo22.Leaf.domain.question.Quiz;
 
 import java.time.LocalDate;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class Deck {
+public class Deck implements Parcelable {
 
     private String id;
     private String title;
@@ -20,7 +26,7 @@ public class Deck {
     private String lang;
     private List<Quiz> questions;
 
-    public Deck(String id, String title) {
+    public Deck(String id, String title, List<Question> questions) {
         this.id = id;
         this.title = title;
         this.creationDate = LocalDate.now();
@@ -44,6 +50,28 @@ public class Deck {
         this.creationDate = creationDate;
         this.lastUpdate = lastUpdate;
     }
+
+    protected Deck(Parcel in) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+        id = in.readString();
+        title = in.readString();
+        category = in.readString();
+        creationDate = LocalDate.parse((in.readString()), formatter);
+        lang = in.readString();
+    }
+
+    public static final Creator<Deck> CREATOR = new Creator<Deck>() {
+        @Override
+        public Deck createFromParcel(Parcel in) {
+            return new Deck(in);
+        }
+
+        @Override
+        public Deck[] newArray(int size) {
+            return new Deck[size];
+        }
+    };
 
     private void updateLastDateTime(){
         this.lastUpdate = LocalDate.now();
@@ -105,5 +133,21 @@ public class Deck {
 
     public LocalDate getLastUpdate() {
         return lastUpdate;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(title);
+        parcel.writeString(category);
+        parcel.writeString(creationDate.toString());
+        parcel.writeString(lastUpdate.toString());
+        parcel.writeString(lang);
+        parcel.writeList(questions);
     }
 }

@@ -1,18 +1,27 @@
 package com.grupo22.Leaf;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.grupo22.Leaf.domain.deck.Deck;
+import com.grupo22.Leaf.menu.SessionActivity;
 import com.grupo22.Leaf.module.adapter.DecksAdapter;
 import com.grupo22.Leaf.module.presenter.DecksPresenter;
 import com.grupo22.Leaf.module.presenter.DecksPresenterImp;
@@ -60,6 +69,10 @@ public class MainActivity extends AppCompatActivity implements DecksView {
                 DeckViewModel deckViewModel = mAdapter.getItem(position);
 
                 //Here we would create the intent and pass the deck
+                Intent intentShare = new Intent(getApplicationContext(), GameActivity.class);
+                intentShare.setType("text/plain");
+                intentShare.putExtra(GameActivity.DECK_KEY, deckViewModel);
+                startActivity(intentShare);
                 Log.d("_TAG", "The deck selected is the following:\n" + deckViewModel.getTitle() + "\n" + deckViewModel.getId());
             }
         });
@@ -80,12 +93,34 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
     @Override
     public void showError() {
-        Toast.makeText(this, R.string.error_general, Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, R.string.general_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void updateDeck(DeckViewModel deck, int position) {
         mAdapter.updateItem(deck, position);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.registry_menu_item:
+                Intent intentSession = new Intent(getApplicationContext(), SessionActivity.class);
+                intentSession.setType("text/plain");
+                startActivity(intentSession);
+                return true;
+            case R.id.settings_menu_item:
+                Toast.makeText(this, R.string.settings_string, Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

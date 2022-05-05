@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Leaf</string>
+    <string name="general_error">Ups, ha ocurrido un error</string>
+    <string name="registry_string">Registrar</string>
+    <string name="settings_string">Configuración</string>
+    <string name="save_session_string">Guardar</string>
+    <string name="email_string">Email</string>
+    <string name="password_string">Contraseña</string>
+    <string name="credentials">CREDENTIALS</string>
+    <string name="decks_number">Mazo número</string>
+</resources>
