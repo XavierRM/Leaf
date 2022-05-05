@@ -25,9 +25,6 @@ public class SessionActivity extends AppCompatActivity implements SessionView {
     EditText email_et, password_et;
     Button save_bt;
 
-    String filename = "credentials.txt";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,8 +51,6 @@ public class SessionActivity extends AppCompatActivity implements SessionView {
                 String text = email_et.getText().toString();
                 text = text + " ";
                 text = text + password_et.getText().toString();
-
-                Log.d("_TAG", text);
 
                 SharedPreferences.Editor editor = mysharedPreferences.edit();
                 editor.putString(getString(R.string.credentials), text);
