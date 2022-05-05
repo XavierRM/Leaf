@@ -22,7 +22,7 @@ public class Deck implements Parcelable {
     private String id;
     private String title;
     private String category;
-    private final LocalDate creationDate;
+    private LocalDate creationDate = LocalDate.now();
     private LocalDate lastUpdate;
     private String lang;
     private List<Quiz> questions;
@@ -59,7 +59,7 @@ public class Deck implements Parcelable {
         id = in.readString();
         title = in.readString();
         category = in.readString();
-        creationDate = LocalDate.parse((in.readString()), formatter);
+        //creationDate = LocalDate.parse((in.readString()), formatter);
         lang = in.readString();
     }
 
