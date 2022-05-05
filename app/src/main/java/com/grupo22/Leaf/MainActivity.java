@@ -70,10 +70,12 @@ public class MainActivity extends AppCompatActivity implements DecksView {
                 //mPresenter.onClickDeck(mAdapter.getItem(position));
                 DeckViewModel deckViewModel = mAdapter.getItem(position);
 
+                Deck deck = new Deck(deckViewModel.getId(), deckViewModel.getTitle(), deckViewModel.getQuestions());
+
                 //Here we would create the intent and pass the deck
                 Intent intentShare = new Intent(getApplicationContext(), GameActivity.class);
                 intentShare.setType("text/plain");
-                intentShare.putExtra(GameActivity.DECK_KEY, (Parcelable) deckViewModel);
+                intentShare.putExtra(GameActivity.DECK_KEY, deck);
                 startActivity(intentShare);
                 Log.d("_TAG", "The deck selected is the following:\n" + deckViewModel.getTitle() + "\n" + deckViewModel.getId());
             }
