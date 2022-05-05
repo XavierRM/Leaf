@@ -31,6 +31,7 @@ public class Deck implements Parcelable {
         this.title = title;
         this.creationDate = LocalDate.now();
         this.lastUpdate = LocalDate.now();
+        this.questions = questions;
     }
 
     public Deck(String title, String category, String lang, List<Quiz> questions) {
