@@ -3,6 +3,7 @@ package com.grupo22.Leaf.domain.deck;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -53,7 +54,7 @@ public class Deck implements Parcelable {
     }
 
     protected Deck(Parcel in) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/dd/MM");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
 
         id = in.readString();
         title = in.readString();
