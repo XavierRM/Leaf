@@ -4,11 +4,9 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.grupo22.Leaf.domain.question.Question;
+import com.grupo22.Leaf.domain.question.Quiz;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -20,7 +18,7 @@ public class Deck {
     private final LocalDate creationDate;
     private LocalDate lastUpdate;
     private String lang;
-    private List<Question> questions;
+    private List<Quiz> questions;
 
     public Deck(String id, String title) {
         this.id = id;
@@ -29,7 +27,7 @@ public class Deck {
         this.lastUpdate = LocalDate.now();
     }
 
-    public Deck(String title, String category, String lang, List<Question> questions) {
+    public Deck(String title, String category, String lang, List<Quiz> questions) {
         this.title = title;
         this.category = category;
         this.lang = lang;
@@ -38,7 +36,7 @@ public class Deck {
         this.lastUpdate = LocalDate.now();
     }
 
-    public Deck(String title, String category, LocalDate creationDate, LocalDate lastUpdate,String lang, List<Question> questions) {
+    public Deck(String title, String category, LocalDate creationDate, LocalDate lastUpdate,String lang, List<Quiz> questions) {
         this.title = title;
         this.category = category;
         this.lang = lang;
@@ -91,12 +89,12 @@ public class Deck {
         this.lang = lang;
     }
 
-    public List<Question> getQuestions() {
+    public List<Quiz> getQuizzes() {
         updateLastDateTime();
         return questions;
     }
 
-    public void setQuestions(List<Question> questions) {
+    public void setQuestions(List<Quiz> questions) {
         updateLastDateTime();
         this.questions = questions;
     }

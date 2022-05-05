@@ -1,13 +1,13 @@
-package com.grupo22.Leaf.domain.question;
+package com.grupo22.Leaf.quizgame.viewmodel;
 
 import java.util.List;
 
-public class Question {
+public class QuizViewModel {
     private String name;
     private List<String> answers;
     private int rightAnswer;
 
-    public Question(String name, List<String> answers, int rightAnswer) {
+    public QuizViewModel(String name, List<String> answers, int rightAnswer) {
         this.name = name;
         this.answers = answers;
         this.rightAnswer = rightAnswer;
