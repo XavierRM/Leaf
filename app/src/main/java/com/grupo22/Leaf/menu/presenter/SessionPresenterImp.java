@@ -2,12 +2,8 @@ package com.grupo22.Leaf.menu.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.preference.PreferenceManager;
-
-import androidx.annotation.RequiresApi;
 
 import com.grupo22.Leaf.R;
 import com.grupo22.Leaf.menu.viewmodel.SessionViewModel;
