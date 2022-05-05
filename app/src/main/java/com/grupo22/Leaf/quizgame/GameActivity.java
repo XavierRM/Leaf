@@ -20,7 +20,7 @@ import java.util.List;
 
 public class GameActivity extends AppCompatActivity implements GameView {
 
-    private static final String DECK_KEY = "DECK_KEY";
+    public static final String DECK_KEY = "DECK_KEY";
     private QuizPresenter mPresenter;
 
     TextView question;

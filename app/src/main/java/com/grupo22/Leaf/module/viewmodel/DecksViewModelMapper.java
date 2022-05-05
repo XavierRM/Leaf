@@ -23,7 +23,7 @@ public class DecksViewModelMapper {
 
         List<DeckViewModel> decks = new ArrayList<>();
         for (Deck deck : mDecks) {
-            decks.add(new DeckViewModel(deck.getId(), deck.getTitle(), deck.getQuestions()));
+            decks.add(new DeckViewModel(deck.getId(), deck.getTitle(), deck.getQuizzes()));
         }
         return decks;
     }

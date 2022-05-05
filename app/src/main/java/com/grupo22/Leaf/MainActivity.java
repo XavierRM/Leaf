@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +28,7 @@ import com.grupo22.Leaf.module.presenter.DecksPresenter;
 import com.grupo22.Leaf.module.presenter.DecksPresenterImp;
 import com.grupo22.Leaf.module.presenter.DecksView;
 import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
+import com.grupo22.Leaf.quizgame.GameActivity;
 
 import java.util.List;
 
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
                 //Here we would create the intent and pass the deck
                 Intent intentShare = new Intent(getApplicationContext(), GameActivity.class);
                 intentShare.setType("text/plain");
-                intentShare.putExtra(GameActivity.DECK_KEY, deckViewModel);
+                intentShare.putExtra(GameActivity.DECK_KEY, (Parcelable) deckViewModel);
                 startActivity(intentShare);
                 Log.d("_TAG", "The deck selected is the following:\n" + deckViewModel.getTitle() + "\n" + deckViewModel.getId());
             }
