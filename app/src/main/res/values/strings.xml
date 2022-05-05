@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Leaf</string>
     <string name="error_general">Ups, ha ocurrido un error</string>
+    <string name="registry_string">Register</string>
+    <string name="settings_string">Settings</string>
+    <string name="save_session_string">Save</string>
+    <string name="email_string">Email</string>
+    <string name="password_string">Password</string>
 </resources>
