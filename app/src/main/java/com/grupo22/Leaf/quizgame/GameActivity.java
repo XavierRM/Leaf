@@ -24,6 +24,7 @@ public class GameActivity extends AppCompatActivity implements GameView {
     private QuizPresenter mPresenter;
 
     TextView question;
+    TextView progress;
     List<Button> answers;
     Deck deck;
 
@@ -31,6 +32,13 @@ public class GameActivity extends AppCompatActivity implements GameView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        question = findViewById(R.id.quiz_question);
+        progress = findViewById(R.id.quizzes_progress);
+        answers.add(findViewById(R.id.but_first_answer));
+        answers.add(findViewById(R.id.but_second_answer));
+        answers.add(findViewById(R.id.but_third_answer));
+        answers.add(findViewById(R.id.but_fourth_answer));
 
         setUpView();
 
