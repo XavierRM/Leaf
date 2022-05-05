@@ -13,6 +13,9 @@
             android:name=".menu.SessionActivity"
             android:exported="false" />
         <activity
+            android:name=".quizgame.GameActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>

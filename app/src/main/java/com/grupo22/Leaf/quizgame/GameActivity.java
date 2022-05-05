@@ -16,6 +16,7 @@ import com.grupo22.Leaf.quizgame.presenter.QuizPresenter;
 import com.grupo22.Leaf.quizgame.presenter.QuizPresenterImp;
 import com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity implements GameView {
@@ -25,13 +26,13 @@ public class GameActivity extends AppCompatActivity implements GameView {
 
     TextView question;
     TextView progress;
-    List<Button> answers;
+    List<Button> answers = new ArrayList<>();
     Deck deck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
 
         question = findViewById(R.id.quiz_question);
         progress = findViewById(R.id.quizzes_progress);

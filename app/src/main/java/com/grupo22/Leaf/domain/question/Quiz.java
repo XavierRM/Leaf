@@ -1,8 +1,11 @@
 package com.grupo22.Leaf.domain.question;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class Quiz {
+public class Quiz implements Parcelable {
     private String name;
     private List<String> answers;
     private int rightAnswer;
@@ -35,5 +38,17 @@ public class Quiz {
 
     public void setRightAnswer(int rightAnswer) {
         this.rightAnswer = rightAnswer;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeList(answers);
+        parcel.writeInt(rightAnswer);
     }
 }
