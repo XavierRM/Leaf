@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 
 import com.grupo22.Leaf.R;
 import com.grupo22.Leaf.domain.deck.Deck;
+import com.grupo22.Leaf.domain.question.Question;
 import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
 import com.grupo22.Leaf.module.viewmodel.DecksViewModelMapper;
 
@@ -51,9 +52,20 @@ public class DecksPresenterImp implements DecksPresenter {
         protected List<Deck> doInBackground(String... textToSearch) {
 
             List<Deck> decks = new ArrayList<>();
+            List<String> answers = new ArrayList<>();
+
+            answers.add("answer 1");
+            answers.add("answer 2");
+            answers.add("answer 3");
+            answers.add("answer 4");
+
+            Question question = new Question("Question name?", answers, 4);
+
+            List<Question> questions = new ArrayList<>();
+            questions.add(question);
 
             for(int i = 0; i < 100; i++) {
-                decks.add(new Deck(Integer.toString(i), (((Context) decksView).getApplicationContext().getString(R.string.decks_number) + " " + i)));
+                decks.add(new Deck(Integer.toString(i), (((Context) decksView).getApplicationContext().getString(R.string.decks_number) + " " + i), questions));
             }
 
             return decks;
