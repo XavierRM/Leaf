@@ -90,6 +90,7 @@ public class GamePresenterImp implements GamePresenter {
             mQuizzesViewModels = getQuizzesViewModel(result);
 
             gameView.showQuiz(mQuizzesViewModels.get(mCurrentQuiz));
+            gameView.updateQuizzesCount(mCurrentQuiz + 1, mQuizzesViewModels.size());
         }
     }
 

@@ -7,6 +7,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/black"
         android:id="@+id/quiz_question" >
     </TextView>
 
@@ -31,12 +33,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/but_check_answer"
-        android:text="@string/check_answer"></Button>
+        android:text="@string/check_answer"
+        android:backgroundTint="@color/design_default_color_secondary"></Button>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/quizzes_progress" >
+        android:textAlignment="center"
+        android:id="@+id/quizzes_progress"
+        android:text="">
     </TextView>
 
 </LinearLayout>
