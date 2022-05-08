@@ -1,6 +1,6 @@
 package com.grupo22.Leaf.module.viewmodel;
 
-import com.grupo22.Leaf.domain.question.Quiz;
+import com.grupo22.Leaf.domain.quiz.Quiz;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class DeckViewModel {
         return title;
     }
 
-    public List<Quiz> getQuestions() {
+    public List<Quiz> getQuizzes() {
         return questions;
     }
 }

@@ -12,4 +12,5 @@
     <string name="error_general">Ups, ha ocurrido un error</string>
     <string name="hit">Enhorabuena, has acertado!</string>
     <string name="miss">Lo siento, has fallado</string>
+    <string name="check_answer">Comprobar</string>
 </resources>

@@ -1,10 +1,10 @@
-package com.grupo22.Leaf.domain.question.conversor;
+package com.grupo22.Leaf.domain.quiz.conversor;
 
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.grupo22.Leaf.domain.question.Quiz;
+import com.grupo22.Leaf.domain.quiz.Quiz;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class QuestionToJsonConversor {
+public class QuizToJsonConversor {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static JSONObject convert(Quiz quiz) throws JSONException {

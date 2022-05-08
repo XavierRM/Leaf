@@ -10,7 +10,7 @@ import androidx.annotation.RequiresApi;
 import com.grupo22.Leaf.R;
 import com.grupo22.Leaf.domain.deck.Deck;
 
-import com.grupo22.Leaf.domain.question.Quiz;
+import com.grupo22.Leaf.domain.quiz.Quiz;
 import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
 import com.grupo22.Leaf.module.viewmodel.DecksViewModelMapper;
 
@@ -60,7 +60,7 @@ public class DecksPresenterImp implements DecksPresenter {
             answers.add("answer 3");
             answers.add("answer 4");
 
-            Quiz question = new Quiz("Question name?", answers, 4);
+            Quiz question = new Quiz("Question name?", answers, 3);
 
             List<Quiz> questions = new ArrayList<>();
             questions.add(question);

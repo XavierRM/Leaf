@@ -5,7 +5,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.grupo22.Leaf.domain.deck.Deck;
-import com.grupo22.Leaf.domain.question.conversor.QuestionToJsonConversor;
+import com.grupo22.Leaf.domain.quiz.conversor.QuizToJsonConversor;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +19,7 @@ public class DeckToJsonConversor {
                 .put("creationDate",deck.getCreationDate())
                 .put("lastUpdate",deck.getLastUpdate())
                 .put("lang",deck.getLang())
-                .put("content", QuestionToJsonConversor.convert(deck.getQuizzes()));
+                .put("content", QuizToJsonConversor.convert(deck.getQuizzes()));
         JSONObject deckJSON = new JSONObject().put("deck",deckInfo);
         return new JSONObject();
     }

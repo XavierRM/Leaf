@@ -1,6 +1,6 @@
 package com.grupo22.Leaf.quizgame.presenter;
 
-public interface QuizPresenter {
+public interface GamePresenter {
 
     void initFlow();
 

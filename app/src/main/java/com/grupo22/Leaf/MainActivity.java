@@ -3,15 +3,12 @@ package com.grupo22.Leaf;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,7 +17,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.grupo22.Leaf.domain.deck.Deck;
 import com.grupo22.Leaf.menu.SessionActivity;
 import com.grupo22.Leaf.module.adapter.DecksAdapter;
@@ -69,10 +65,10 @@ public class MainActivity extends AppCompatActivity implements DecksView {
                 //mPresenter.onClickDeck(mAdapter.getItem(position));
                 DeckViewModel deckViewModel = mAdapter.getItem(position);
 
-                Deck deck = new Deck(deckViewModel.getId(), deckViewModel.getTitle(), deckViewModel.getQuestions());
+                Deck deck = new Deck(deckViewModel.getId(), deckViewModel.getTitle(), deckViewModel.getQuizzes());
 
                 //Here we would create the intent and pass the deck
-                Intent intentShare = new Intent(getApplicationContext(), GameActivity.class);
+                Intent intentShare = new Intent(getBaseContext(), GameActivity.class);
                 intentShare.putExtra(GameActivity.DECK_KEY, deck);
                 startActivity(intentShare);
                 Log.d("_TAG", "The deck selected is the following:\n" + deckViewModel.getTitle() + "\n" + deckViewModel.getId());

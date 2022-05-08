@@ -3,17 +3,15 @@ package com.grupo22.Leaf.domain.deck;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import com.grupo22.Leaf.domain.question.Quiz;
+import com.grupo22.Leaf.domain.quiz.Quiz;
 
 import java.time.LocalDate;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -25,30 +23,30 @@ public class Deck implements Parcelable {
     private LocalDate creationDate = LocalDate.now();
     private LocalDate lastUpdate;
     private String lang;
-    private List<Quiz> questions;
+    private List<Quiz> quizzes;
 
-    public Deck(String id, String title, List<Quiz> questions) {
+    public Deck(String id, String title, List<Quiz> quizzes) {
         this.id = id;
         this.title = title;
         this.creationDate = LocalDate.now();
         this.lastUpdate = LocalDate.now();
-        this.questions = questions;
+        this.quizzes = quizzes;
     }
 
-    public Deck(String title, String category, String lang, List<Quiz> questions) {
+    public Deck(String title, String category, String lang, List<Quiz> quizzes) {
         this.title = title;
         this.category = category;
         this.lang = lang;
-        this.questions = questions;
+        this.quizzes = quizzes;
         this.creationDate = LocalDate.now();
         this.lastUpdate = LocalDate.now();
     }
 
-    public Deck(String title, String category, LocalDate creationDate, LocalDate lastUpdate,String lang, List<Quiz> questions) {
+    public Deck(String title, String category, LocalDate creationDate, LocalDate lastUpdate,String lang, List<Quiz> quizzes) {
         this.title = title;
         this.category = category;
         this.lang = lang;
-        this.questions = questions;
+        this.quizzes = quizzes;
         this.creationDate = creationDate;
         this.lastUpdate = lastUpdate;
     }
@@ -59,8 +57,11 @@ public class Deck implements Parcelable {
         id = in.readString();
         title = in.readString();
         category = in.readString();
-        //creationDate = LocalDate.parse((in.readString()), formatter);
+        creationDate = LocalDate.parse((in.readString()), formatter);
+        lastUpdate = LocalDate.parse((in.readString()), formatter);
         lang = in.readString();
+        quizzes = new ArrayList<>();
+        in.readTypedList(quizzes, Quiz.CREATOR);
     }
 
     public static final Creator<Deck> CREATOR = new Creator<Deck>() {
@@ -94,7 +95,7 @@ public class Deck implements Parcelable {
         return title;
     }
 
-    public void setTittle(String title) {
+    public void setTitle(String title) {
         updateLastDateTime();
         this.title = title;
     }
@@ -121,12 +122,12 @@ public class Deck implements Parcelable {
 
     public List<Quiz> getQuizzes() {
         updateLastDateTime();
-        return questions;
+        return quizzes;
     }
 
-    public void setQuestions(List<Quiz> questions) {
+    public void setQuizzes(List<Quiz> quizzes) {
         updateLastDateTime();
-        this.questions = questions;
+        this.quizzes = quizzes;
     }
 
     public LocalDate getCreationDate() {
@@ -150,6 +151,6 @@ public class Deck implements Parcelable {
         parcel.writeString(creationDate.toString());
         parcel.writeString(lastUpdate.toString());
         parcel.writeString(lang);
-        parcel.writeTypedList(questions);
+        parcel.writeTypedList(quizzes);
     }
 }

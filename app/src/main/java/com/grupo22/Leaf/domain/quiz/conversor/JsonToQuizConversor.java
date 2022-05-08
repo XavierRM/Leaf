@@ -1,6 +1,6 @@
-package com.grupo22.Leaf.domain.question.conversor;
+package com.grupo22.Leaf.domain.quiz.conversor;
 
-import com.grupo22.Leaf.domain.question.Quiz;
+import com.grupo22.Leaf.domain.quiz.Quiz;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonToQuestionConversor {
+public class JsonToQuizConversor {
 
     public static Quiz convert(JSONObject content) throws JSONException {
         List<String> answers = new ArrayList<>();

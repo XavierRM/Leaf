@@ -3,11 +3,12 @@ package com.grupo22.Leaf.quizgame.presenter;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import com.grupo22.Leaf.domain.deck.Deck;
-import com.grupo22.Leaf.domain.question.Quiz;
+import com.grupo22.Leaf.domain.quiz.Quiz;
 import com.grupo22.Leaf.quizgame.GameActivity;
 import com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel;
 import com.grupo22.Leaf.quizgame.viewmodel.QuizzesViewModelMapper;
@@ -15,7 +16,7 @@ import com.grupo22.Leaf.quizgame.viewmodel.QuizzesViewModelMapper;
 import java.util.List;
 
 
-public class QuizPresenterImp implements QuizPresenter {
+public class GamePresenterImp implements GamePresenter {
 
     private GameView gameView;
 
@@ -23,7 +24,7 @@ public class QuizPresenterImp implements QuizPresenter {
     private int mCurrentQuiz = 0;
     private int mSelectedAnswer;
 
-    public QuizPresenterImp(GameView view) {
+    public GamePresenterImp(GameView view) {
         gameView = view;
     }
 
@@ -45,15 +46,23 @@ public class QuizPresenterImp implements QuizPresenter {
             gameView.showHit();
         else gameView.showMiss();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ++mCurrentQuiz;
-                gameView.updateQuizzesCount(mCurrentQuiz + 1, mQuizzesViewModels.size());
-                gameView.showQuiz(mQuizzesViewModels.get(mCurrentQuiz));
-            }
-        }, 1500);
-
+        if (++mCurrentQuiz < mQuizzesViewModels.size()) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    gameView.updateQuizzesCount(mCurrentQuiz + 1, mQuizzesViewModels.size());
+                    gameView.showQuiz(mQuizzesViewModels.get(mCurrentQuiz));
+                }
+            }, 1500);
+        }
+        else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    gameView.showEndScreen();
+                }
+            }, 1500);
+        }
 
         // show summary end screen when deck finished
     }

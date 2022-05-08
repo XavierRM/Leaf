@@ -13,4 +13,6 @@ public interface GameView {
     void showMiss();
 
     void updateQuizzesCount(int currentQuiz, int totalQuizzes);
+
+    void showEndScreen();
 }

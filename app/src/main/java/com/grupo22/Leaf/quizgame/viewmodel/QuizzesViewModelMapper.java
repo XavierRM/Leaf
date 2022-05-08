@@ -3,7 +3,7 @@ package com.grupo22.Leaf.quizgame.viewmodel;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
-import com.grupo22.Leaf.domain.question.Quiz;
+import com.grupo22.Leaf.domain.quiz.Quiz;
 
 import java.util.ArrayList;
 import java.util.List;
