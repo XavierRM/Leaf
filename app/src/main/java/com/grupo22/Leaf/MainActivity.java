@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         mRecycler.setLayoutManager(linearLayoutManager);
 
         mAdapter = new DecksAdapter();
-        mRecycler.setAdapter(mAdapter);
 
         mAdapter.setClickListener(new DecksAdapter.OnItemClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -86,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         mAdapter.setItems(decks);
         mEmptyView.setVisibility(View.GONE);
         mRecycler.setVisibility(View.VISIBLE);
+        mRecycler.setAdapter(mAdapter);
     }
 
     @Override
