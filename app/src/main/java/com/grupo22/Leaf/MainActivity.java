@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements DecksView {
     }
 
     private void setUpView() {
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(linearLayoutManager);
 
