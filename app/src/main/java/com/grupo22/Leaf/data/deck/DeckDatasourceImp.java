@@ -11,9 +11,9 @@ public class DeckDatasourceImp implements DeckDatasource {
     @Override
     public List<Deck> searchDecks(String textToSearch) {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://leaf-c7512-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference myRef = database.getReference("decks");
+        DatabaseReference myRef = database.getReference("/");
 
-        myRef.setValue("Hello, World!");
+        myRef.setValue("Hello, World2!");
         return null;
     }
 }

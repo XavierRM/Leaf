@@ -56,7 +56,7 @@ public class DecksPresenterImp implements DecksPresenter {
         @RequiresApi(api = Build.VERSION_CODES.O)
         protected List<Deck> doInBackground(String... textToSearch) {
 
-            /*List<Deck> decks = new ArrayList<>();
+            List<Deck> decks = new ArrayList<>();
             List<String> answers = new ArrayList<>();
 
             answers.add("answer 1");
@@ -73,8 +73,8 @@ public class DecksPresenterImp implements DecksPresenter {
                 decks.add(new Deck(Integer.toString(i), (((Context) decksView).getApplicationContext().getString(R.string.decks_number) + " " + i), questions));
             }
 
-            return decks;*/
-            return mDeckService.searchDecks("");
+            return decks;
+           // return mDeckService.searchDecks("");
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)

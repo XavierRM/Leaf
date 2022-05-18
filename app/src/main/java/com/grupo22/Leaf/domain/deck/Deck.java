@@ -52,7 +52,7 @@ public class Deck implements Parcelable {
     }
 
     protected Deck(Parcel in) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         id = in.readString();
         title = in.readString();
