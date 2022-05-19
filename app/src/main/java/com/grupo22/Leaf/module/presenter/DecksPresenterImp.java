@@ -1,9 +1,7 @@
 package com.grupo22.Leaf.module.presenter;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -13,11 +11,9 @@ import com.grupo22.Leaf.domain.deck.Deck;
 
 import com.grupo22.Leaf.domain.deck.service.DeckService;
 import com.grupo22.Leaf.domain.deck.service.DeckServiceImp;
-import com.grupo22.Leaf.domain.quiz.Quiz;
 import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
 import com.grupo22.Leaf.module.viewmodel.DecksViewModelMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DecksPresenterImp implements DecksPresenter {
@@ -43,17 +39,14 @@ public class DecksPresenterImp implements DecksPresenter {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void initFlow() {
-
         // Añadir onError
-        decksView.setLoadingIndicatorVisible(true);
+        decksView.setLoadingIndicatorVisibility(true);
+        
         mDeckService.searchDecks("", decks -> {
-            decksView.setLoadingIndicatorVisible(false);
+            decksView.setLoadingIndicatorVisibility(false);
             mDecksViewModels = getDecksViewModel(decks);
             decksView.showDecks(mDecksViewModels);
         });
-
-
-
     }
 
     @Override

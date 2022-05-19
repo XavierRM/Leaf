@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         }
     }
 
-    public void setLoadingIndicatorVisible(boolean show) {
+    public void setLoadingIndicatorVisibility(boolean show) {
         if (show) {
             progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Loading decks");

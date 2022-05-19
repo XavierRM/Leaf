@@ -25,6 +25,7 @@ public class DeckDatasourceImp implements DeckDatasource {
 
     public DeckDatasourceImp() {
         database = FirebaseDatabase.getInstance(FIREBASE_DB_URL);
+        database.setPersistenceEnabled(true);
     }
 
     @Override
