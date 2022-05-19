@@ -10,9 +10,10 @@ public class DeckServiceImp implements DeckService {
 
     private DeckDatasource mDatasource = new DeckDatasourceImp();
 
-    @Override
-    public List<Deck> searchDecks(String textToSearch) {
 
-        return mDatasource.searchDecks(textToSearch);
+    @Override
+    public void searchDecks(String textToSearch, OnResultListener<List<Deck>> onResultListener) {
+        mDatasource.searchDecks(textToSearch, onResultListener);
     }
+
 }

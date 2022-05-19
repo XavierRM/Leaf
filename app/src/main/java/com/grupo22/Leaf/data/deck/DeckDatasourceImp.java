@@ -25,10 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
+import com.grupo22.Leaf.domain.deck.service.DeckService;
 
 public class DeckDatasourceImp implements DeckDatasource {
     @Override
-    public List<Deck> searchDecks(String textToSearch) {
+    public List<Deck> searchDecks(String textToSearch, DeckService.OnResultListener<List<Deck>> onResultListener) {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://leaf-c7512-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference myRef = database.getReference("decks/0");
 
@@ -40,12 +41,12 @@ public class DeckDatasourceImp implements DeckDatasource {
                     Log.e("firebase", "Error getting data", task.getException());
                 }
                 else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                    try {
-                        Deck deck = JsonToDeckConversor.convert(task.getResult().toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    Log.d("firebase", String.valueOf(task.getResult().getValue(Deck.class)));
+
+                    Deck deck = task.getResult().getValue(Deck.class);
+                    List<Deck> decks = new ArrayList<>();
+                    decks.add(deck);
+                    onResultListener.onResult(decks);
                 }
             }
         });

@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface DeckService {
 
-    List<Deck> searchDecks(String textToSearch);
+    interface OnResultListener<TResult> {
+        void onResult(TResult result);
+    }
+   void searchDecks(String textToSearch, OnResultListener<List<Deck>> listener);
 
     //updateDeck()
 }

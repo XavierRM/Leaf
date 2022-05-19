@@ -3,6 +3,7 @@ package com.grupo22.Leaf.module.presenter;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -32,10 +33,22 @@ public class DecksPresenterImp implements DecksPresenter {
         decksView = view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private List<DeckViewModel> getDecksViewModel(List<Deck> decks) {
+
+        mDecksViewModels = new DecksViewModelMapper(decks).map();
+        return mDecksViewModels;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void initFlow() {
 
-        new GetDecksTask().execute();
+        // Añadir onError
+        mDeckService.searchDecks("", decks -> {
+            mDecksViewModels = getDecksViewModel(decks);
+            decksView.showDecks(mDecksViewModels);
+        });
 
     }
 
@@ -44,14 +57,9 @@ public class DecksPresenterImp implements DecksPresenter {
         Toast.makeText((Context) decksView, R.string.general_error, Toast.LENGTH_SHORT).show();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private List<DeckViewModel> getDecksViewModel(List<Deck> decks) {
 
-        mDecksViewModels = new DecksViewModelMapper(decks).map();
-        return mDecksViewModels;
-    }
 
-    private class GetDecksTask extends AsyncTask<String, Void, List<Deck>> {
+/*    private class GetDecksTask extends AsyncTask<String, Void, List<Deck>> {
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         protected List<Deck> doInBackground(String... textToSearch) {
@@ -74,7 +82,13 @@ public class DecksPresenterImp implements DecksPresenter {
             }
 
            // return decks;
-            return mDeckService.searchDecks("");
+            return mDeckService.searchDecks("", new DeckService.OnResultListener<List<Deck>>() {
+                @Override
+                public void onResult(List<Deck> result) {
+                    mDecksViewModels = getDecksViewModel(result);
+                    decksView.showDecks(mDecksViewModels);
+                }
+            });
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -83,5 +97,5 @@ public class DecksPresenterImp implements DecksPresenter {
             mDecksViewModels = getDecksViewModel(result);
             decksView.showDecks(mDecksViewModels);
         }
-    }
+    }*/
 }
