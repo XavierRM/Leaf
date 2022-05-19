@@ -43,22 +43,6 @@ public class DecksPresenterImp implements DecksPresenter {
     public void initFlow() {
         // Añadir onError
 
-        List<String> answers = new ArrayList<>();
-
-        answers.add("answer 1");
-        answers.add("answer 2");
-        answers.add("answer 3");
-        answers.add("answer 4");
-
-        Quiz question = new Quiz("Question?", answers, 3);
-
-        List<Quiz> questions = new ArrayList<>();
-        questions.add(question);
-
-        Deck deck = new Deck("titulo2o", "categ", "Langg", questions);
-
-        mDeckService.createDeck(deck);
-
         decksView.setLoadingIndicatorVisibility(true);
 
         mDeckService.searchDecks("", decks -> {
