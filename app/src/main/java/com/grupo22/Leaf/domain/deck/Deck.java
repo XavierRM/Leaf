@@ -29,6 +29,8 @@ public class Deck implements Parcelable {
     private String lang;
     private List<Quiz> quizzes;
 
+    private final String DATE_PATTERN = "yyyy-MM-dd";
+
     public Deck() {
     }
 
@@ -42,7 +44,7 @@ public class Deck implements Parcelable {
     }
 
     protected Deck(Parcel in) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
         id = in.readString();
         title = in.readString();
@@ -124,7 +126,7 @@ public class Deck implements Parcelable {
     }
 
     public void setCreationDate(String creationDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
         this.creationDate = LocalDate.parse(creationDate, formatter);
     }
 
@@ -133,7 +135,7 @@ public class Deck implements Parcelable {
     }
 
     public void setLastUpdate(String lastUpdate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
         this.lastUpdate = LocalDate.parse(lastUpdate, formatter);
     }
 

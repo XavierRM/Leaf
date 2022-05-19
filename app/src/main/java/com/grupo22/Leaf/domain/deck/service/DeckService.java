@@ -14,5 +14,7 @@ public interface DeckService {
 
     void createDeck(Deck deck);
 
+    void updateDeck(Deck deck);
+
     //updateDeck()
 }

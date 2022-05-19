@@ -24,6 +24,7 @@ public class DeckDatasourceImp implements DeckDatasource {
 
     private FirebaseDatabase database;
     private final String FIREBASE_DB_URL = "https://leaf-c7512-default-rtdb.europe-west1.firebasedatabase.app/";
+    private final String DECKS_ENDPOINT = "decks";
 
     public DeckDatasourceImp() {
         database = FirebaseDatabase.getInstance(FIREBASE_DB_URL);
@@ -32,7 +33,7 @@ public class DeckDatasourceImp implements DeckDatasource {
 
     @Override
     public void searchDecks(String textToSearch, DeckService.OnResultListener<List<Deck>> onResultListener) {
-        DatabaseReference decksRef = database.getReference("decks");
+        DatabaseReference decksRef = database.getReference(DECKS_ENDPOINT);
 
         decksRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -61,11 +62,19 @@ public class DeckDatasourceImp implements DeckDatasource {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void createDeck(Deck deck) {
-        String key = database.getReference().child("decks").push().getKey();
-        Map<String, Object> deckMap = deck.toMap();
+        String key = database.getReference().child(DECKS_ENDPOINT).push().getKey();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/decks/" + key, deckMap);
+        childUpdates.put(DECKS_ENDPOINT + key, deck.toMap());
+
+        database.getReference().updateChildren(childUpdates);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void updateDeck(Deck deck) {
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put(DECKS_ENDPOINT + "/" + deck.getId(), deck.toMap());
 
         database.getReference().updateChildren(childUpdates);
     }
