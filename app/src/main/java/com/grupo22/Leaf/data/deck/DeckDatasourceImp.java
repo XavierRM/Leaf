@@ -16,7 +16,9 @@ import com.grupo22.Leaf.domain.deck.datasource.DeckDatasource;
 import com.grupo22.Leaf.domain.deck.service.DeckService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DeckDatasourceImp implements DeckDatasource {
 
@@ -46,6 +48,7 @@ public class DeckDatasourceImp implements DeckDatasource {
 
                     for (DataSnapshot deckSnapshot : task.getResult().getChildren()) {
                         Deck deck = deckSnapshot.getValue(Deck.class);
+                        deck.setId(deckSnapshot.getKey());
                         decks.add(deck);
                     }
 
@@ -53,5 +56,17 @@ public class DeckDatasourceImp implements DeckDatasource {
                 }
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void createDeck(Deck deck) {
+        String key = database.getReference().child("decks").push().getKey();
+        Map<String, Object> deckMap = deck.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/decks/" + key, deckMap);
+
+        database.getReference().updateChildren(childUpdates);
     }
 }

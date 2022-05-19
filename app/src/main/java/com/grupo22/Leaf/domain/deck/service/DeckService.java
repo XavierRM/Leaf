@@ -9,7 +9,10 @@ public interface DeckService {
     interface OnResultListener<TResult> {
         void onResult(TResult result);
     }
-   void searchDecks(String textToSearch, OnResultListener<List<Deck>> listener);
+
+    void searchDecks(String textToSearch, OnResultListener<List<Deck>> listener);
+
+    void createDeck(Deck deck);
 
     //updateDeck()
 }

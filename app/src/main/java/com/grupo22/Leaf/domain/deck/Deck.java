@@ -13,8 +13,10 @@ import java.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class Deck implements Parcelable {
@@ -30,21 +32,13 @@ public class Deck implements Parcelable {
     public Deck() {
     }
 
-    public Deck(String id, String title, List<Quiz> quizzes) {
-        this.id = id;
+    public Deck(String title, String category, String lang, List<Quiz> quizzes) {
         this.title = title;
         this.creationDate = LocalDate.now();
         this.lastUpdate = LocalDate.now();
         this.quizzes = quizzes;
-    }
-
-    public Deck(String title, String category, LocalDate creationDate, LocalDate lastUpdate, String lang, List<Quiz> quizzes) {
-        this.title = title;
         this.category = category;
         this.lang = lang;
-        this.quizzes = quizzes;
-        this.creationDate = creationDate;
-        this.lastUpdate = lastUpdate;
     }
 
     protected Deck(Parcel in) {
@@ -82,7 +76,6 @@ public class Deck implements Parcelable {
 
     @Exclude
     public void setId(String id) {
-        updateLastModificationTime();
         this.id = id;
     }
 
@@ -158,5 +151,18 @@ public class Deck implements Parcelable {
         parcel.writeString(lastUpdate.toString());
         parcel.writeString(lang);
         parcel.writeTypedList(quizzes);
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("category", category);
+        result.put("creationDate", creationDate.toString());
+        result.put("lang", lang);
+        result.put("lastUpdate", lastUpdate.toString());
+        result.put("quizzes", quizzes.stream().map(Quiz::toMap).collect(Collectors.toList()));
+        result.put("title", title);
+
+        return result;
     }
 }

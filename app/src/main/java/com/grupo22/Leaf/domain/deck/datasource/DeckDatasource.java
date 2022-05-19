@@ -8,4 +8,6 @@ import java.util.List;
 public interface DeckDatasource {
 
     void searchDecks(String textToSearch, DeckService.OnResultListener<List<Deck>> onResultListener);
+
+    void createDeck(Deck deck);
 }

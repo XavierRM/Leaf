@@ -3,22 +3,22 @@ package com.grupo22.Leaf.quizgame.viewmodel;
 import java.util.List;
 
 public class QuizViewModel {
-    private String name;
+    private String question;
     private List<String> answers;
     private int rightAnswer;
 
-    public QuizViewModel(String name, List<String> answers, int rightAnswer) {
-        this.name = name;
+    public QuizViewModel(String question, List<String> answers, int rightAnswer) {
+        this.question = question;
         this.answers = answers;
         this.rightAnswer = rightAnswer;
     }
 
-    public String getName() {
-        return name;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public List<String> getAnswers() {

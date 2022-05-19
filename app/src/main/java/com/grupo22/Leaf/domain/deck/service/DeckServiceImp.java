@@ -16,4 +16,9 @@ public class DeckServiceImp implements DeckService {
         mDatasource.searchDecks(textToSearch, onResultListener);
     }
 
+    @Override
+    public void createDeck(Deck deck) {
+        mDatasource.createDeck(deck);
+    }
+
 }

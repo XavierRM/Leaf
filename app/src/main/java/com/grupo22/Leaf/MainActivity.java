@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
                 //mPresenter.onClickDeck(mAdapter.getItem(position));
                 DeckViewModel deckViewModel = mAdapter.getItem(position);
 
-                Deck deck = new Deck(deckViewModel.getId(), deckViewModel.getTitle(), deckViewModel.getQuizzes());
+                Deck deck = new Deck(deckViewModel.getTitle(), deckViewModel.getCategory(), deckViewModel.getLang(), deckViewModel.getQuizzes());
 
                 //Here we would create the intent and pass the deck
                 Intent intentShare = new Intent(getBaseContext(), GameActivity.class);
