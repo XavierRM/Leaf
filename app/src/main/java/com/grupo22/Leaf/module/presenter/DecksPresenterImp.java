@@ -45,10 +45,14 @@ public class DecksPresenterImp implements DecksPresenter {
     public void initFlow() {
 
         // Añadir onError
+        decksView.setLoadingIndicatorVisible(true);
         mDeckService.searchDecks("", decks -> {
+            decksView.setLoadingIndicatorVisible(false);
             mDecksViewModels = getDecksViewModel(decks);
             decksView.showDecks(mDecksViewModels);
         });
+
+
 
     }
 

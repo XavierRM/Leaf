@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
     RecyclerView mRecycler;
     TextView mEmptyView;
+
+    ProgressDialog progressDialog;
 
     private DecksAdapter mAdapter;
 
@@ -120,5 +123,16 @@ public class MainActivity extends AppCompatActivity implements DecksView {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void setLoadingIndicatorVisible(boolean show) {
+        if (show) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Loading decks");
+            progressDialog.setMessage("Wait while loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+        else progressDialog.dismiss();
     }
 }
