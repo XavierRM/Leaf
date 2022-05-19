@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface DeckDatasource {
 
-    List<Deck> searchDecks(String textToSearch, DeckService.OnResultListener<List<Deck>> onResultListener);
+    void searchDecks(String textToSearch, DeckService.OnResultListener<List<Deck>> onResultListener);
 }

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class Deck implements Parcelable {
@@ -21,7 +22,7 @@ public class Deck implements Parcelable {
     private String id;
     private String title;
     private String category;
-    private LocalDate creationDate = LocalDate.now();
+    private LocalDate creationDate;
     private LocalDate lastUpdate;
     private String lang;
     private List<Quiz> quizzes;
@@ -37,16 +38,7 @@ public class Deck implements Parcelable {
         this.quizzes = quizzes;
     }
 
-    public Deck(String title, String category, String lang, List<Quiz> quizzes) {
-        this.title = title;
-        this.category = category;
-        this.lang = lang;
-        this.quizzes = quizzes;
-        this.creationDate = LocalDate.now();
-        this.lastUpdate = LocalDate.now();
-    }
-
-    public Deck(String title, String category, LocalDate creationDate, LocalDate lastUpdate,String lang, List<Quiz> quizzes) {
+    public Deck(String title, String category, LocalDate creationDate, LocalDate lastUpdate, String lang, List<Quiz> quizzes) {
         this.title = title;
         this.category = category;
         this.lang = lang;
@@ -88,6 +80,7 @@ public class Deck implements Parcelable {
         return id;
     }
 
+    @Exclude
     public void setId(String id) {
         updateLastModificationTime();
         this.id = id;
@@ -97,6 +90,7 @@ public class Deck implements Parcelable {
         return title;
     }
 
+    @Exclude
     public void setTitle(String title) {
         updateLastModificationTime();
         this.title = title;
@@ -106,6 +100,7 @@ public class Deck implements Parcelable {
         return category;
     }
 
+    @Exclude
     public void setCategory(String category) {
         updateLastModificationTime();
         this.category = category;
@@ -115,6 +110,7 @@ public class Deck implements Parcelable {
         return lang;
     }
 
+    @Exclude
     public void setLang(String lang) {
         updateLastModificationTime();
         this.lang = lang;
@@ -124,19 +120,28 @@ public class Deck implements Parcelable {
         return quizzes;
     }
 
+    @Exclude
     public void setQuizzes(List<Quiz> quizzes) {
         updateLastModificationTime();
         this.quizzes = quizzes;
     }
 
-    @Exclude
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    @Exclude
+    public void setCreationDate(String creationDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.creationDate = LocalDate.parse(creationDate, formatter);
+    }
+
     public String getLastUpdate() {
         return lastUpdate.toString();
+    }
+
+    public void setLastUpdate(String lastUpdate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.lastUpdate = LocalDate.parse(lastUpdate, formatter);
     }
 
     @Override
