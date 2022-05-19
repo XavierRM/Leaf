@@ -46,9 +46,6 @@ public class DecksPresenterImp implements DecksPresenter {
         decksView.setLoadingIndicatorVisibility(true);
 
         mDeckService.searchDecks("", decks -> {
-            Deck d = decks.get(0);
-            d.setLang("nuevoLang");
-            mDeckService.updateDeck(d);
             decksView.setLoadingIndicatorVisibility(false);
             mDecksViewModels = getDecksViewModel(decks);
             decksView.showDecks(mDecksViewModels);
