@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.firebase.database.Exclude;
 import com.grupo22.Leaf.domain.quiz.Quiz;
 
 import java.time.LocalDate;
@@ -24,6 +25,9 @@ public class Deck implements Parcelable {
     private LocalDate lastUpdate;
     private String lang;
     private List<Quiz> quizzes;
+
+    public Deck() {
+    }
 
     public Deck(String id, String title, List<Quiz> quizzes) {
         this.id = id;
@@ -76,66 +80,63 @@ public class Deck implements Parcelable {
         }
     };
 
-    private void updateLastDateTime(){
+    private void updateLastModificationTime() {
         this.lastUpdate = LocalDate.now();
     }
 
     public String getId() {
-        updateLastDateTime();
         return id;
     }
 
     public void setId(String id) {
-        updateLastDateTime();
+        updateLastModificationTime();
         this.id = id;
     }
 
     public String getTitle() {
-        updateLastDateTime();
         return title;
     }
 
     public void setTitle(String title) {
-        updateLastDateTime();
+        updateLastModificationTime();
         this.title = title;
     }
 
     public String getCategory() {
-        updateLastDateTime();
         return category;
     }
 
     public void setCategory(String category) {
-        updateLastDateTime();
+        updateLastModificationTime();
         this.category = category;
     }
 
     public String getLang() {
-        updateLastDateTime();
         return lang;
     }
 
     public void setLang(String lang) {
-        updateLastDateTime();
+        updateLastModificationTime();
         this.lang = lang;
     }
 
     public List<Quiz> getQuizzes() {
-        updateLastDateTime();
         return quizzes;
     }
 
     public void setQuizzes(List<Quiz> quizzes) {
-        updateLastDateTime();
+        updateLastModificationTime();
         this.quizzes = quizzes;
     }
 
+    @Exclude
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public LocalDate getLastUpdate() {
-        return lastUpdate;
+    @Exclude
+    public String getLastUpdate() {
+        return lastUpdate.toString();
     }
 
     @Override

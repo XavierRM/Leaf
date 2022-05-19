@@ -11,6 +11,9 @@ public class Quiz implements Parcelable {
     private List<String> answers;
     private int rightAnswer;
 
+    public Quiz() {
+    }
+
     public Quiz(String name, List<String> answers, int rightAnswer) {
         this.name = name;
         this.answers = answers;

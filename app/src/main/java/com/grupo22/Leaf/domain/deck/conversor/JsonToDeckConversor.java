@@ -20,4 +20,9 @@ public class JsonToDeckConversor {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return new Deck(json.getString("title"), json.getString("category"), LocalDate.parse(json.getString("creationDate"), formatter), LocalDate.parse(json.getString("lastUpdate"),formatter), json.getString("lang"), JsonToQuizConversor.convert(json.getJSONArray("content")));
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static Deck convert(String json) throws JSONException {
+        return JsonToDeckConversor.convert(new JSONObject(json));
+    }
 }
