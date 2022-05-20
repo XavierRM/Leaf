@@ -20,7 +20,7 @@ public class QuizToJsonConversor {
         for (String s: quiz.getAnswers()){
             answersArray.put(new JSONObject().put("value",s));
         }
-        JSONObject questionJSON = new JSONObject().put("question",quiz.getName())
+        JSONObject questionJSON = new JSONObject().put("question",quiz.getQuestion())
                 .put("answers",answersArray)
                 .put("rightAnswer",quiz.getRightAnswer());
         return questionJSON;

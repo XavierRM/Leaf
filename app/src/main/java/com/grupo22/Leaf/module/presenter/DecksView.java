@@ -13,4 +13,6 @@ public interface DecksView {
     void showError();
 
     void updateDeck(DeckViewModel deck, int position);
+
+    void setLoadingIndicatorVisibility(boolean show);
 }

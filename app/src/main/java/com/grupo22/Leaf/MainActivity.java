@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements DecksView {
     RecyclerView mRecycler;
     TextView mEmptyView;
 
+    ProgressDialog progressDialog;
+
     private DecksAdapter mAdapter;
 
     private DecksPresenter mPresenter;
@@ -52,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements DecksView {
     }
 
     private void setUpView() {
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(linearLayoutManager);
 
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
                 //mPresenter.onClickDeck(mAdapter.getItem(position));
                 DeckViewModel deckViewModel = mAdapter.getItem(position);
 
-                Deck deck = new Deck(deckViewModel.getId(), deckViewModel.getTitle(), deckViewModel.getQuizzes());
+                Deck deck = new Deck(deckViewModel.getTitle(), deckViewModel.getCategory(), deckViewModel.getLang(), deckViewModel.getQuizzes());
 
                 //Here we would create the intent and pass the deck
                 Intent intentShare = new Intent(getBaseContext(), GameActivity.class);
@@ -121,5 +123,16 @@ public class MainActivity extends AppCompatActivity implements DecksView {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void setLoadingIndicatorVisibility(boolean show) {
+        if (show) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Loading decks");
+            progressDialog.setMessage("Wait while loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+        else progressDialog.dismiss();
     }
 }

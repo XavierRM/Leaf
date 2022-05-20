@@ -6,13 +6,17 @@ import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.firebase.database.Exclude;
 import com.grupo22.Leaf.domain.quiz.Quiz;
 
 import java.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class Deck implements Parcelable {
@@ -20,39 +24,27 @@ public class Deck implements Parcelable {
     private String id;
     private String title;
     private String category;
-    private LocalDate creationDate = LocalDate.now();
+    private LocalDate creationDate;
     private LocalDate lastUpdate;
     private String lang;
     private List<Quiz> quizzes;
 
-    public Deck(String id, String title, List<Quiz> quizzes) {
-        this.id = id;
-        this.title = title;
-        this.creationDate = LocalDate.now();
-        this.lastUpdate = LocalDate.now();
-        this.quizzes = quizzes;
+    private final String DATE_PATTERN = "yyyy-MM-dd";
+
+    public Deck() {
     }
 
     public Deck(String title, String category, String lang, List<Quiz> quizzes) {
         this.title = title;
-        this.category = category;
-        this.lang = lang;
-        this.quizzes = quizzes;
         this.creationDate = LocalDate.now();
         this.lastUpdate = LocalDate.now();
-    }
-
-    public Deck(String title, String category, LocalDate creationDate, LocalDate lastUpdate,String lang, List<Quiz> quizzes) {
-        this.title = title;
+        this.quizzes = quizzes;
         this.category = category;
         this.lang = lang;
-        this.quizzes = quizzes;
-        this.creationDate = creationDate;
-        this.lastUpdate = lastUpdate;
     }
 
     protected Deck(Parcel in) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
         id = in.readString();
         title = in.readString();
@@ -76,57 +68,56 @@ public class Deck implements Parcelable {
         }
     };
 
-    private void updateLastDateTime(){
+    private void updateLastModificationTime() {
         this.lastUpdate = LocalDate.now();
     }
 
     public String getId() {
-        updateLastDateTime();
         return id;
     }
 
+    @Exclude
     public void setId(String id) {
-        updateLastDateTime();
         this.id = id;
     }
 
     public String getTitle() {
-        updateLastDateTime();
         return title;
     }
 
+    @Exclude
     public void setTitle(String title) {
-        updateLastDateTime();
+        updateLastModificationTime();
         this.title = title;
     }
 
     public String getCategory() {
-        updateLastDateTime();
         return category;
     }
 
+    @Exclude
     public void setCategory(String category) {
-        updateLastDateTime();
+        updateLastModificationTime();
         this.category = category;
     }
 
     public String getLang() {
-        updateLastDateTime();
         return lang;
     }
 
+    @Exclude
     public void setLang(String lang) {
-        updateLastDateTime();
+        updateLastModificationTime();
         this.lang = lang;
     }
 
     public List<Quiz> getQuizzes() {
-        updateLastDateTime();
         return quizzes;
     }
 
+    @Exclude
     public void setQuizzes(List<Quiz> quizzes) {
-        updateLastDateTime();
+        updateLastModificationTime();
         this.quizzes = quizzes;
     }
 
@@ -134,8 +125,18 @@ public class Deck implements Parcelable {
         return creationDate;
     }
 
-    public LocalDate getLastUpdate() {
-        return lastUpdate;
+    public void setCreationDate(String creationDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
+        this.creationDate = LocalDate.parse(creationDate, formatter);
+    }
+
+    public String getLastUpdate() {
+        return lastUpdate.toString();
+    }
+
+    public void setLastUpdate(String lastUpdate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
+        this.lastUpdate = LocalDate.parse(lastUpdate, formatter);
     }
 
     @Override
@@ -152,5 +153,18 @@ public class Deck implements Parcelable {
         parcel.writeString(lastUpdate.toString());
         parcel.writeString(lang);
         parcel.writeTypedList(quizzes);
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("category", category);
+        result.put("creationDate", creationDate.toString());
+        result.put("lang", lang);
+        result.put("lastUpdate", lastUpdate.toString());
+        result.put("quizzes", quizzes.stream().map(Quiz::toMap).collect(Collectors.toList()));
+        result.put("title", title);
+
+        return result;
     }
 }

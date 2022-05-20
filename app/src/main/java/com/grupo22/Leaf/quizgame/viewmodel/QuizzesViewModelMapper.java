@@ -16,12 +16,12 @@ public class QuizzesViewModelMapper {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public List<QuizViewModel> map() {
+    public List<com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel> map() {
 
-        List<QuizViewModel> quizzes = new ArrayList<>();
+        List<com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel> quizzes = new ArrayList<>();
 
         for (Quiz quiz : mQuizzes) {
-            quizzes.add(new QuizViewModel(quiz.getName(), quiz.getAnswers(), quiz.getRightAnswer()));
+            quizzes.add(new com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel(quiz.getQuestion(), quiz.getAnswers(), quiz.getRightAnswer()));
         }
 
         return quizzes;

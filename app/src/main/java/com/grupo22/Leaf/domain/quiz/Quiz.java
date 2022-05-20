@@ -3,22 +3,30 @@ package com.grupo22.Leaf.domain.quiz;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Quiz implements Parcelable {
-    private String name;
+
+    private String question;
     private List<String> answers;
     private int rightAnswer;
 
-    public Quiz(String name, List<String> answers, int rightAnswer) {
-        this.name = name;
+    public Quiz() {
+    }
+
+    public Quiz(String question, List<String> answers, int rightAnswer) {
+        this.question = question;
         this.answers = answers;
         this.rightAnswer = rightAnswer;
     }
 
     protected Quiz(Parcel in) {
-        name = in.readString();
+        question = in.readString();
         answers = new ArrayList<>();
         in.readStringList(answers);
         rightAnswer = in.readInt();
@@ -36,12 +44,12 @@ public class Quiz implements Parcelable {
         }
     };
 
-    public String getName() {
-        return name;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public List<String> getAnswers() {
@@ -67,8 +75,19 @@ public class Quiz implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
+        parcel.writeString(question);
         parcel.writeStringList(answers);
         parcel.writeInt(rightAnswer);
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("question", question);
+        result.put("answers", answers);
+        result.put("rightAnswer", rightAnswer);
+
+        return result;
     }
 }
