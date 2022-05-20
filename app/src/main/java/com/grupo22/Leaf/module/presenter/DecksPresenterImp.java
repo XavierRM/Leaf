@@ -1,7 +1,6 @@
 package com.grupo22.Leaf.module.presenter;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.widget.Toast;
 
@@ -10,6 +9,8 @@ import androidx.annotation.RequiresApi;
 import com.grupo22.Leaf.R;
 import com.grupo22.Leaf.domain.deck.Deck;
 
+import com.grupo22.Leaf.domain.deck.service.DeckService;
+import com.grupo22.Leaf.domain.deck.service.DeckServiceImp;
 import com.grupo22.Leaf.domain.quiz.Quiz;
 import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
 import com.grupo22.Leaf.module.viewmodel.DecksViewModelMapper;
@@ -23,21 +24,11 @@ public class DecksPresenterImp implements DecksPresenter {
 
     private List<DeckViewModel> mDecksViewModels;
 
+    private DeckService mDeckService = new DeckServiceImp();
+
     public DecksPresenterImp(DecksView view) {
 
         decksView = view;
-    }
-
-    @Override
-    public void initFlow() {
-
-        new GetDecksTask().execute();
-
-    }
-
-    @Override
-    public void onClickDeck(DeckViewModel deck) {
-        Toast.makeText((Context) decksView, R.string.general_error, Toast.LENGTH_SHORT).show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -47,7 +38,28 @@ public class DecksPresenterImp implements DecksPresenter {
         return mDecksViewModels;
     }
 
-    private class GetDecksTask extends AsyncTask<String, Void, List<Deck>> {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void initFlow() {
+        // Añadir onError
+
+        decksView.setLoadingIndicatorVisibility(true);
+
+        mDeckService.searchDecks("", decks -> {
+            decksView.setLoadingIndicatorVisibility(false);
+            mDecksViewModels = getDecksViewModel(decks);
+            decksView.showDecks(mDecksViewModels);
+        });
+    }
+
+    @Override
+    public void onClickDeck(DeckViewModel deck) {
+        Toast.makeText((Context) decksView, R.string.general_error, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+/*    private class GetDecksTask extends AsyncTask<String, Void, List<Deck>> {
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         protected List<Deck> doInBackground(String... textToSearch) {
@@ -69,7 +81,14 @@ public class DecksPresenterImp implements DecksPresenter {
                 decks.add(new Deck(Integer.toString(i), (((Context) decksView).getApplicationContext().getString(R.string.decks_number) + " " + i), questions));
             }
 
-            return decks;
+           // return decks;
+            return mDeckService.searchDecks("", new DeckService.OnResultListener<List<Deck>>() {
+                @Override
+                public void onResult(List<Deck> result) {
+                    mDecksViewModels = getDecksViewModel(result);
+                    decksView.showDecks(mDecksViewModels);
+                }
+            });
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -78,5 +97,5 @@ public class DecksPresenterImp implements DecksPresenter {
             mDecksViewModels = getDecksViewModel(result);
             decksView.showDecks(mDecksViewModels);
         }
-    }
+    }*/
 }

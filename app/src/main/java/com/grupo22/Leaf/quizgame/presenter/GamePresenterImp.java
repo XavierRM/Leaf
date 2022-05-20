@@ -3,14 +3,12 @@ package com.grupo22.Leaf.quizgame.presenter;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import com.grupo22.Leaf.domain.deck.Deck;
 import com.grupo22.Leaf.domain.quiz.Quiz;
 import com.grupo22.Leaf.quizgame.GameActivity;
-import com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel;
 import com.grupo22.Leaf.quizgame.viewmodel.QuizzesViewModelMapper;
 
 import java.util.List;
@@ -20,7 +18,7 @@ public class GamePresenterImp implements GamePresenter {
 
     private GameView gameView;
 
-    private List<QuizViewModel> mQuizzesViewModels;
+    private List<com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel> mQuizzesViewModels;
     private int mCurrentQuiz = 0;
     private int mSelectedAnswer;
 
@@ -41,7 +39,7 @@ public class GamePresenterImp implements GamePresenter {
 
     @Override
     public void onCheckClick() {
-        QuizViewModel currentQuiz = mQuizzesViewModels.get(mCurrentQuiz);
+        com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel currentQuiz = mQuizzesViewModels.get(mCurrentQuiz);
         if (currentQuiz.getRightAnswer() == mSelectedAnswer)
             gameView.showHit();
         else gameView.showMiss();
@@ -68,7 +66,7 @@ public class GamePresenterImp implements GamePresenter {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private List<QuizViewModel> getQuizzesViewModel(List<Quiz> quizzes) {
+    private List<com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel> getQuizzesViewModel(List<Quiz> quizzes) {
 
         mQuizzesViewModels = new QuizzesViewModelMapper(quizzes).map();
         return mQuizzesViewModels;

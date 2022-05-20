@@ -94,12 +94,15 @@ public class GameActivity extends AppCompatActivity implements GameView {
         return deck;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void showQuiz(QuizViewModel quiz) {
-        this.question.setText(quiz.getName());
+        checkAnswerButton.setBackgroundColor(getColor(com.google.android.material.R.color.design_default_color_secondary));
+        this.question.setText(quiz.getQuestion());
         List<String> answers = quiz.getAnswers();
         for (int i = 0; i < answers.size(); ++i) {
             this.answers.get(i).setText(answers.get(i));
+            this.answers.get(i).setBackgroundColor(getColor(com.google.android.material.R.color.design_default_color_primary));
         }
     }
 
