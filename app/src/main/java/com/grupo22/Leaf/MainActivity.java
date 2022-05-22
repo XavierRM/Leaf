@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
     RecyclerView mRecycler;
     TextView mEmptyView;
+    ImageButton editButton;
 
     ProgressDialog progressDialog;
 
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
         mRecycler = findViewById(R.id.decks_list);
         mEmptyView = findViewById(R.id.artists_empty_list);
+        editButton = findViewById(R.id.edit_deck_but);
 
         setUpView();
 

@@ -43,6 +43,16 @@ public class Deck implements Parcelable {
         this.lang = lang;
     }
 
+    public Deck(String id, String title, String category, String lang, List<Quiz> quizzes) {
+        this.id = id;
+        this.title = title;
+        this.creationDate = LocalDate.now();
+        this.lastUpdate = LocalDate.now();
+        this.quizzes = quizzes;
+        this.category = category;
+        this.lang = lang;
+    }
+
     protected Deck(Parcel in) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
 

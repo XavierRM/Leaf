@@ -8,7 +8,7 @@
         android:id="@+id/layout_row_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="20"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
@@ -24,19 +24,10 @@
             android:textSize="9pt"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_row_edit_icon"
+    <ImageButton
+        android:id="@+id/edit_deck_but"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <ImageButton
-            android:id="@+id/edit_deck_but"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@android:drawable/ic_menu_edit" />
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_edit" />
 
 </LinearLayout>

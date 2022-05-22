@@ -13,4 +13,5 @@
     <string name="hit">Congratulations, you guessed correctly!</string>
     <string name="miss">You missed, try again</string>
     <string name="check_answer">Check</string>
+    <string name="DECK_KEY">DECK_KEY</string>
 </resources>
