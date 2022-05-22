@@ -2,18 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/deck_title"
+    <LinearLayout
+        android:id="@+id/layout_row_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18pt"/>
+        android:layout_weight="20"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/deck_id"
+        <TextView
+            android:id="@+id/deck_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18pt"/>
+
+        <TextView
+            android:id="@+id/deck_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="9pt"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_edit_icon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="9pt"/>
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/edit_deck_but"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/ic_menu_edit" />
+
+    </LinearLayout>
 
 </LinearLayout>
