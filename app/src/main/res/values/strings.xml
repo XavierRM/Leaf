@@ -9,8 +9,8 @@
     <string name="password_string">Password</string>
     <string name="credentials">CREDENTIALS</string>
     <string name="decks_number">Decks number</string>
-    <string name="error_general">Ups, ha ocurrido un error</string>
-    <string name="hit">Enhorabuena, has acertado!</string>
-    <string name="miss">Lo siento, has fallado</string>
-    <string name="check_answer">Comprobar</string>
+    <string name="error_general">Ups, an error has occurred</string>
+    <string name="hit">Congratulations, you guessed correctly!</string>
+    <string name="miss">You missed, try again</string>
+    <string name="check_answer">Check</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.grupo22.Leaf.module.adapter;
+package com.grupo22.Leaf.decksmain.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.grupo22.Leaf.R;
-import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
+import com.grupo22.Leaf.decksmain.viewmodel.DeckViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
