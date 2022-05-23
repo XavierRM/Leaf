@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
     RecyclerView mRecycler;
     TextView mEmptyView;
-    ImageButton editButton;
 
     ProgressDialog progressDialog;
 
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
         mRecycler = findViewById(R.id.decks_list);
         mEmptyView = findViewById(R.id.artists_empty_list);
-        editButton = findViewById(R.id.edit_deck_but);
 
         setUpView();
 
