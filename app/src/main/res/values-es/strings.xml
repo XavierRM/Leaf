@@ -14,4 +14,7 @@
     <string name="miss">Lo siento, has fallado</string>
     <string name="check_answer">Comprobar</string>
     <string name="DECK_KEY">DECK_KEY</string>
+    <string name="QUIZ_KEY">QUIZ_KEY</string>
+    <string name="save_string">Guardar</string>
+
 </resources>

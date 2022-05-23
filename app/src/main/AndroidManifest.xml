@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Leaf">
         <activity
+            android:name=".edit.EditQuizActivity"
+            android:exported="false" />
+        <activity
             android:name=".edit.ListQuizActivity"
             android:exported="false" />
         <activity

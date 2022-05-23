@@ -76,12 +76,12 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
             public void onClick(View view, int position) {
                 QuizViewModel quizViewModel = mAdapter.getItem(position);
 
-                //Quiz quiz = new Quiz(quizViewModel.getQuestion(), quizViewModel.getAnswers(), quizViewModel.getRightAnswer());
+                Quiz quiz = new Quiz(quizViewModel.getQuestion(), quizViewModel.getAnswers(), quizViewModel.getRightAnswer());
 
                 //Here we would create the intent and pass the deck
-                //Intent intentShare = new Intent(getBaseContext(), EditQuizActivity.class);
-                //intentShare.putExtra(getString(R.string.QUIZ_KEY), quiz);
-                //startActivity(intentShare);
+                Intent intentShare = new Intent(getBaseContext(), EditQuizActivity.class);
+                intentShare.putExtra(getString(R.string.QUIZ_KEY), quiz);
+                startActivity(intentShare);
                 Log.d("_TAG", "The deck selected is the following:\n" + quizViewModel.getQuestion() + "\n" + quizViewModel.getAnswers().size());
             }
         });
