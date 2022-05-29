@@ -104,7 +104,7 @@ public class QuizzesAdapter extends RecyclerView.Adapter<QuizzesAdapter.QuizHold
     public void updateItem(QuizViewModel item,
                            int position) {
 
-        mDataset.add(position, item);
+        mDataset.set(position, item);
         notifyItemChanged(position);
     }
 

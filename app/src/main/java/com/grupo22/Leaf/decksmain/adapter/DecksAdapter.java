@@ -121,7 +121,7 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.DeckHolder> 
     public void updateItem(DeckViewModel item,
                            int position) {
 
-        mDataset.add(position, item);
+        mDataset.set(position, item);
         notifyItemChanged(position);
     }
 
