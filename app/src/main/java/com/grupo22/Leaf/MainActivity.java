@@ -53,7 +53,12 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         setUpView();
 
         mPresenter = new DecksPresenterImp(this);
+    }
+
+    @Override
+    protected void onResume() {
         mPresenter.initFlow();
+        super.onResume();
     }
 
     private void setUpView() {

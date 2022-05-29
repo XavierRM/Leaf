@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,8 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
 
     RecyclerView mRecycler;
     TextView mEmptyView;
-    Button addQuizButton;
+    EditText deckTitle;
+    Button addQuizButton, saveButton;
     Deck deck;
     int lastEditPosition = 0;
 
@@ -44,7 +46,7 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
 
     private QuizzesAdapter mAdapter;
     private QuizzesPresenter mPresenter;
-    //private DeckService mDeckService = new DeckServiceImp();
+    private DeckService mDeckService = new DeckServiceImp();
 
     ActivityResultLauncher<Intent> my_startActivityForResultAddQuiz = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -102,7 +104,9 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
 
         mRecycler = findViewById(R.id.quizzes_list);
         mEmptyView = findViewById(R.id.quizzes_empty_list);
+        deckTitle = findViewById(R.id.edit_deck_title_et);
         addQuizButton = findViewById(R.id.add_quiz_button);
+        saveButton = findViewById(R.id.save_quizzes_button);
 
         setUpView();
 
@@ -111,14 +115,19 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
 
     }
 
-    @Override
-    public void onBackPressed() {
-
-        //mDeckService.updateDeck(deck);
-        super.onBackPressed();
-    }
-
     private void setUpView() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                deck.setTitle(deckTitle.getText().toString());
+                mDeckService.updateDeck(deck);
+                finish();
+            }
+        });
+
+        deckTitle.setText(deck.getTitle());
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(linearLayoutManager);
 
