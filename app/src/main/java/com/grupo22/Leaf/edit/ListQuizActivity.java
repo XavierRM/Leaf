@@ -1,5 +1,9 @@
 package com.grupo22.Leaf.edit;
 
+import static android.content.Intent.EXTRA_TEXT;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +29,16 @@ import com.grupo22.Leaf.edit.presenter.QuizzesPresenterImp;
 import com.grupo22.Leaf.edit.presenter.QuizzesView;
 import com.grupo22.Leaf.quizgame.GameActivity;
 import com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel;
+import com.grupo22.Leaf.quizgame.viewmodel.QuizzesViewModelMapper;
 
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
 
     RecyclerView mRecycler;
     TextView mEmptyView;
+    Button addQuizButton;
     Deck deck;
 
     ProgressDialog progressDialog;
@@ -38,6 +46,25 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
     private QuizzesAdapter mAdapter;
 
     private QuizzesPresenter mPresenter;
+
+    ActivityResultLauncher<Intent> my_startActivityForResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == AppCompatActivity.RESULT_OK) {
+                    Intent data = result.getData();
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        Quiz quiz = bundle.getParcelable(getString(R.string.QUIZ_KEY));
+                        if (quiz != null) {
+                            List<Quiz> quizzes = deck.getQuizzes();
+                            quizzes.add(quiz);
+                            QuizzesViewModelMapper quizzesViewModelMapper = new QuizzesViewModelMapper(quizzes);
+                            mAdapter.setItems(quizzesViewModelMapper.map());
+                        }
+                    }
+                }
+            }
+    );
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -56,6 +83,7 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
 
         mRecycler = findViewById(R.id.quizzes_list);
         mEmptyView = findViewById(R.id.quizzes_empty_list);
+        addQuizButton = findViewById(R.id.add_quiz_button);
 
         setUpView();
 
@@ -79,10 +107,20 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
                 Quiz quiz = new Quiz(quizViewModel.getQuestion(), quizViewModel.getAnswers(), quizViewModel.getRightAnswer());
 
                 //Here we would create the intent and pass the deck
-                Intent intentShare = new Intent(getBaseContext(), EditQuizActivity.class);
-                intentShare.putExtra(getString(R.string.QUIZ_KEY), quiz);
-                startActivity(intentShare);
+                Intent intent = new Intent(getBaseContext(), EditQuizActivity.class);
+                intent.putExtra(getString(R.string.QUIZ_KEY), quiz);
+                startActivity(intent);
                 Log.d("_TAG", "The deck selected is the following:\n" + quizViewModel.getQuestion() + "\n" + quizViewModel.getAnswers().size());
+            }
+        });
+
+        addQuizButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), AddQuizActivity.class);
+                //intent.putExtra(getString(R.string.DECK_KEY), deck);
+                my_startActivityForResult.launch(intent);
             }
         });
     }
