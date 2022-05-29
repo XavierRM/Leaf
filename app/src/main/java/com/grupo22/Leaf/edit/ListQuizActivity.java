@@ -1,7 +1,5 @@
 package com.grupo22.Leaf.edit;
 
-import static android.content.Intent.EXTRA_TEXT;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
@@ -20,14 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.grupo22.Leaf.R;
-import com.grupo22.Leaf.decksmain.adapter.DecksAdapter;
 import com.grupo22.Leaf.domain.deck.Deck;
 import com.grupo22.Leaf.domain.quiz.Quiz;
 import com.grupo22.Leaf.edit.adapter.QuizzesAdapter;
 import com.grupo22.Leaf.edit.presenter.QuizzesPresenter;
 import com.grupo22.Leaf.edit.presenter.QuizzesPresenterImp;
 import com.grupo22.Leaf.edit.presenter.QuizzesView;
-import com.grupo22.Leaf.quizgame.GameActivity;
 import com.grupo22.Leaf.quizgame.viewmodel.QuizViewModel;
 import com.grupo22.Leaf.quizgame.viewmodel.QuizzesViewModelMapper;
 
