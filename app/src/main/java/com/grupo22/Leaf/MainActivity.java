@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
     private DecksPresenter mPresenter;
 
+    Button createDeckBut;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +51,13 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
         mRecycler = findViewById(R.id.decks_list);
         mEmptyView = findViewById(R.id.artists_empty_list);
+        createDeckBut = findViewById(R.id.create_deck_but);
 
-        setUpView();
+        //Log.d("_TAG","Button exists with text: "+createDeckBut.getText().toString());
 
         mPresenter = new DecksPresenterImp(this);
+
+        setUpView();
     }
 
     @Override
@@ -81,6 +86,13 @@ public class MainActivity extends AppCompatActivity implements DecksView {
                 intentShare.putExtra(GameActivity.DECK_KEY, deck);
                 startActivity(intentShare);
                 Log.d("_TAG", "The deck selected is the following:\n" + deckViewModel.getTitle() + "\n" + deckViewModel.getId());
+            }
+        });
+
+        createDeckBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.onClickCreate();
             }
         });
     }

@@ -60,13 +60,15 @@ public class DeckDatasourceImp implements DeckDatasource {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void createDeck(Deck deck) {
+    public String createDeck(Deck deck) {
         String key = database.getReference().child(DECKS_ENDPOINT).push().getKey();
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(DECKS_ENDPOINT + key, deck.toMap());
 
         database.getReference().updateChildren(childUpdates);
+
+        return key;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

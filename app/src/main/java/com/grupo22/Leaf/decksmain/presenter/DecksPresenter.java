@@ -7,4 +7,6 @@ public interface DecksPresenter {
     void initFlow();
 
     void onClickDeck(DeckViewModel deck);
+
+    void onClickCreate();
 }
