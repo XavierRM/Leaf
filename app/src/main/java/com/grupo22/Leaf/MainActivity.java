@@ -15,16 +15,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.grupo22.Leaf.domain.deck.Deck;
 import com.grupo22.Leaf.menu.SessionActivity;
-import com.grupo22.Leaf.module.adapter.DecksAdapter;
-import com.grupo22.Leaf.module.presenter.DecksPresenter;
-import com.grupo22.Leaf.module.presenter.DecksPresenterImp;
-import com.grupo22.Leaf.module.presenter.DecksView;
-import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
+import com.grupo22.Leaf.decksmain.adapter.DecksAdapter;
+import com.grupo22.Leaf.decksmain.presenter.DecksPresenter;
+import com.grupo22.Leaf.decksmain.presenter.DecksPresenterImp;
+import com.grupo22.Leaf.decksmain.presenter.DecksView;
+import com.grupo22.Leaf.decksmain.viewmodel.DeckViewModel;
 import com.grupo22.Leaf.quizgame.GameActivity;
 
 import java.util.List;
@@ -51,7 +53,12 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         setUpView();
 
         mPresenter = new DecksPresenterImp(this);
+    }
+
+    @Override
+    protected void onResume() {
         mPresenter.initFlow();
+        super.onResume();
     }
 
     private void setUpView() {

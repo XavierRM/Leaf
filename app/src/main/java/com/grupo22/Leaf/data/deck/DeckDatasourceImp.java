@@ -27,9 +27,8 @@ public class DeckDatasourceImp implements DeckDatasource {
     private final String DECKS_ENDPOINT = "decks";
 
     public DeckDatasourceImp() {
-        database = FirebaseDatabase.getInstance(FIREBASE_DB_URL);
-        database.setPersistenceEnabled(true);
-    }
+        //database.setPersistenceEnabled(true);
+        database = FirebaseDatabase.getInstance(FIREBASE_DB_URL); }
 
     @Override
     public void searchDecks(String textToSearch, DeckService.OnResultListener<List<Deck>> onResultListener) {

@@ -1,22 +1,31 @@
-package com.grupo22.Leaf.module.adapter;
+package com.grupo22.Leaf.decksmain.adapter;
 
+import android.content.Intent;
+import android.media.Image;
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.grupo22.Leaf.R;
-import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
+import com.grupo22.Leaf.decksmain.viewmodel.DeckViewModel;
+import com.grupo22.Leaf.domain.deck.Deck;
+import com.grupo22.Leaf.edit.ListQuizActivity;
+import com.grupo22.Leaf.quizgame.GameActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.DeckHolder> {
 
-    private List<DeckViewModel> mDataset;
+    private static List<DeckViewModel> mDataset;
     private static OnItemClickListener clickListener;
 
     public interface OnItemClickListener {
@@ -25,15 +34,36 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.DeckHolder> 
 
     public static class DeckHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView title, id;
+        public ImageButton editButton;
+        public DeckHolder row;
+
         public DeckHolder(View view) {
             super(view);
+            row = this;
             title = view.findViewById(R.id.deck_title);
             id = view.findViewById(R.id.deck_id);
+            editButton = view.findViewById(R.id.edit_deck_but);
             view.setOnClickListener(this);
         }
         public void bind(DeckViewModel deckViewModel) {
             title.setText(deckViewModel.getTitle());
             id.setText(deckViewModel.getId());
+            editButton.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onClick(View view) {
+                    //Intent
+                    DeckViewModel deckViewModel = mDataset.get(row.getAdapterPosition());
+
+                    Deck deck = new Deck(deckViewModel.getId(), deckViewModel.getTitle(), deckViewModel.getCategory(), deckViewModel.getLang(), deckViewModel.getQuizzes());
+
+                    //Here we would create the intent and pass the deck
+                    Intent intentShare = new Intent(view.getContext(), ListQuizActivity.class);
+                    intentShare.putExtra(view.getContext().getString(R.string.DECK_KEY), deck);
+                    view.getContext().startActivity(intentShare);
+                    Log.d("_TAG", "The deck position is the following: " + row.getAdapterPosition());
+                }
+            });
         }
 
         @Override
@@ -91,7 +121,7 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.DeckHolder> 
     public void updateItem(DeckViewModel item,
                            int position) {
 
-        mDataset.add(position, item);
+        mDataset.set(position, item);
         notifyItemChanged(position);
     }
 

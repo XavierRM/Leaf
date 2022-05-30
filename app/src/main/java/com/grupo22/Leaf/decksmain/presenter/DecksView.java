@@ -1,6 +1,6 @@
-package com.grupo22.Leaf.module.presenter;
+package com.grupo22.Leaf.decksmain.presenter;
 
-import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
+import com.grupo22.Leaf.decksmain.viewmodel.DeckViewModel;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.grupo22.Leaf.module.presenter;
+package com.grupo22.Leaf.decksmain.presenter;
 
 import android.content.Context;
 import android.os.Build;
@@ -11,11 +11,9 @@ import com.grupo22.Leaf.domain.deck.Deck;
 
 import com.grupo22.Leaf.domain.deck.service.DeckService;
 import com.grupo22.Leaf.domain.deck.service.DeckServiceImp;
-import com.grupo22.Leaf.domain.quiz.Quiz;
-import com.grupo22.Leaf.module.viewmodel.DeckViewModel;
-import com.grupo22.Leaf.module.viewmodel.DecksViewModelMapper;
+import com.grupo22.Leaf.decksmain.viewmodel.DeckViewModel;
+import com.grupo22.Leaf.decksmain.viewmodel.DecksViewModelMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DecksPresenterImp implements DecksPresenter {
