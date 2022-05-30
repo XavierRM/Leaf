@@ -1,11 +1,13 @@
 package com.grupo22.Leaf.decksmain.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.grupo22.Leaf.MainActivity;
 import com.grupo22.Leaf.R;
 import com.grupo22.Leaf.domain.deck.Deck;
 
@@ -13,7 +15,10 @@ import com.grupo22.Leaf.domain.deck.service.DeckService;
 import com.grupo22.Leaf.domain.deck.service.DeckServiceImp;
 import com.grupo22.Leaf.decksmain.viewmodel.DeckViewModel;
 import com.grupo22.Leaf.decksmain.viewmodel.DecksViewModelMapper;
+import com.grupo22.Leaf.domain.quiz.Quiz;
+import com.grupo22.Leaf.edit.ListQuizActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DecksPresenterImp implements DecksPresenter {
@@ -53,6 +58,18 @@ public class DecksPresenterImp implements DecksPresenter {
     @Override
     public void onClickDeck(DeckViewModel deck) {
         Toast.makeText((Context) decksView, R.string.general_error, Toast.LENGTH_SHORT).show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onClickCreate(){
+        Deck emptyDeck = new Deck("","none","es",new ArrayList<Quiz>());
+        String key = mDeckService.createDeck(emptyDeck);
+        emptyDeck.setId(key);
+
+        Intent intentShare = new Intent((Context) decksView, ListQuizActivity.class);
+        intentShare.putExtra(((Context) decksView).getString(R.string.DECK_KEY), emptyDeck);
+        ((Context) decksView).startActivity(intentShare);
     }
 
 

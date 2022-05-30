@@ -9,7 +9,7 @@ public interface DeckDatasource {
 
     void searchDecks(String textToSearch, DeckService.OnResultListener<List<Deck>> onResultListener);
 
-    void createDeck(Deck deck);
+    String createDeck(Deck deck);
 
     void updateDeck(Deck deck);
 }

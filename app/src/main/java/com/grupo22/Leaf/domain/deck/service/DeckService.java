@@ -12,7 +12,7 @@ public interface DeckService {
 
     void searchDecks(String textToSearch, OnResultListener<List<Deck>> listener);
 
-    void createDeck(Deck deck);
+    String createDeck(Deck deck);
 
     void updateDeck(Deck deck);
 

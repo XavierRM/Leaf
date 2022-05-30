@@ -17,4 +17,5 @@
     <string name="QUIZ_KEY">QUIZ_KEY</string>
     <string name="save_string">Save</string>
     <string name="add_quiz_text">Add Question</string>
+    <string name="create_button_text">Create</string>
 </resources>
