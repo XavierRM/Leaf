@@ -3,6 +3,7 @@ package com.grupo22.Leaf.decksmain.presenter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -63,7 +64,7 @@ public class DecksPresenterImp implements DecksPresenter {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClickCreate(){
-        Deck emptyDeck = new Deck("","none","es",new ArrayList<Quiz>());
+        Deck emptyDeck = new Deck("deffault","none","es",new ArrayList<Quiz>());
         String key = mDeckService.createDeck(emptyDeck);
         emptyDeck.setId(key);
 
