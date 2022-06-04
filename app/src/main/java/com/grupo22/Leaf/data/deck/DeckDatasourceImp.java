@@ -64,7 +64,7 @@ public class DeckDatasourceImp implements DeckDatasource {
         String key = database.getReference().child(DECKS_ENDPOINT).push().getKey();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put(DECKS_ENDPOINT + key, deck.toMap());
+        childUpdates.put(DECKS_ENDPOINT +"/"+ key, deck.toMap());
 
         database.getReference().updateChildren(childUpdates);
 
