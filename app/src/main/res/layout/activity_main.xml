@@ -8,6 +8,17 @@
     android:orientation="vertical"
     >
 
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sw_decks"
+        android:textOff="@string/sw_mine"
+        android:textOn="@string/sw_all"
+        android:showText="true"
+        >
+    </Switch>
+
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"

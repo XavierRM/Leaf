@@ -37,6 +37,8 @@ public class DecksPresenterImp implements DecksPresenter {
 
     String uid = FirebaseAuth.getInstance().getUid();
 
+    private boolean onlyUserDecks = true;
+
     public DecksPresenterImp(DecksView view) {
 
         decksView = view;
@@ -58,30 +60,28 @@ public class DecksPresenterImp implements DecksPresenter {
 
         Log.d("_TAG",uid);
 
-        mUserService.getUser(uid, user -> {
-            mDeckService.searchDecks("", decks -> {
-                //Temporal
-                List<Deck> newDecks = new ArrayList<Deck>();
-                for (Deck d: decks) {
-                    if (user.getUserDecks().contains(d.getId())){
-                        newDecks.add(d);
+        if(onlyUserDecks) {
+            mUserService.getUser(uid, user -> {
+                mDeckService.searchDecks("", decks -> {
+                    //Temporal
+                    List<Deck> newDecks = new ArrayList<Deck>();
+                    for (Deck d : decks) {
+                        if (user.getUserDecks().contains(d.getId())) {
+                            newDecks.add(d);
+                        }
                     }
-                }
+                    decksView.setLoadingIndicatorVisibility(false);
+                    mDecksViewModels = getDecksViewModel(newDecks);
+                    decksView.showDecks(mDecksViewModels);
+                });
+            });
+        }else{
+            mDeckService.searchDecks("", decks -> {
                 decksView.setLoadingIndicatorVisibility(false);
-                mDecksViewModels = getDecksViewModel(newDecks);
+                mDecksViewModels = getDecksViewModel(decks);
                 decksView.showDecks(mDecksViewModels);
             });
-        });
-
-        /*mDeckService.searchDecks("", decks -> {
-            //Temporal
-            List<Deck> newDecks = new ArrayList<Deck>();
-            for (de)
-            //
-            decksView.setLoadingIndicatorVisibility(false);
-            mDecksViewModels = getDecksViewModel(decks);
-            decksView.showDecks(mDecksViewModels);
-        });*/
+        }
     }
 
     @Override
@@ -106,6 +106,13 @@ public class DecksPresenterImp implements DecksPresenter {
         Intent intentShare = new Intent((Context) decksView, ListQuizActivity.class);
         intentShare.putExtra(((Context) decksView).getString(R.string.DECK_KEY), emptyDeck);
         ((Context) decksView).startActivity(intentShare);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void switchDecksChanged() {
+        this.onlyUserDecks=!this.onlyUserDecks;
+        initFlow();
     }
 
 

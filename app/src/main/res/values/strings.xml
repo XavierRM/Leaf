@@ -18,4 +18,6 @@
     <string name="save_string">Save</string>
     <string name="add_quiz_text">Add Question</string>
     <string name="create_button_text">Create</string>
+    <string name="sw_mine">My decks</string>
+    <string name="sw_all">All decks</string>
 </resources>
