@@ -15,4 +15,6 @@ public interface DecksView {
     void updateDeck(DeckViewModel deck, int position);
 
     void setLoadingIndicatorVisibility(boolean show);
+
+    String getTitleValue();
 }

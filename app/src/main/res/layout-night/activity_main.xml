@@ -7,6 +7,20 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_search_title"
+        android:id="@+id/tv_search_title"
+        >
+    </TextView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_title"
+        android:id="@+id/et_search_title"
+        ></EditText>
 
     <Switch
         android:layout_width="match_parent"

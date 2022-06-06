@@ -20,4 +20,6 @@
     <string name="create_button_text">Create</string>
     <string name="sw_mine">My decks</string>
     <string name="sw_all">All decks</string>
+    <string name="tv_search_title">Search by tittle:</string>
+    <string name="et_title">Title</string>
 </resources>

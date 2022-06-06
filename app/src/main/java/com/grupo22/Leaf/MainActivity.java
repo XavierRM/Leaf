@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
     Switch userDecksSwitch;
 
+    EditText etTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         mEmptyView = findViewById(R.id.artists_empty_list);
         createDeckBut = findViewById(R.id.create_deck_but);
         userDecksSwitch = findViewById(R.id.sw_decks);
+        etTitle = findViewById(R.id.et_search_title);
 
         //Log.d("_TAG","Button exists with text: "+createDeckBut.getText().toString());
 
@@ -109,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         });
     }
 
+
+
     @Override
     public void showDecks(List<DeckViewModel> decks) {
         mAdapter.setItems(decks);
@@ -138,6 +144,11 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    public String getTitleValue(){
+        return etTitle.getText().toString();
     }
 
     @Override
