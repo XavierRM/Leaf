@@ -6,16 +6,49 @@
     android:orientation="vertical"
     tools:context=".edit.ListQuizActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/et_title"
+        ></TextView>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_deck_title_et"/>
+        android:id="@+id/edit_deck_title_et"
+        android:hint="@string/et_title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/et_lang"
+        ></TextView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_lang"
+        android:id="@+id/edit_deck_et_lang"
+        ></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/et_categ"
+        ></TextView>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_categ_edit_deck"
+        android:spinnerMode="dropdown"
+        ></Spinner>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="2">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/quizzes_list"
@@ -28,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_weight="10">
+        android:layout_weight="5">
 
         <Button
             android:layout_width="wrap_content"

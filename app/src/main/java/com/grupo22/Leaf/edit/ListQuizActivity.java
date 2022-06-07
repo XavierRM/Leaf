@@ -13,8 +13,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,7 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
     EditText deckTitle;
     Button addQuizButton, saveButton;
     Deck deck;
+    Spinner categorySpinner;
     int lastEditPosition = 0;
 
     ProgressDialog progressDialog;
@@ -107,6 +111,7 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
         deckTitle = findViewById(R.id.edit_deck_title_et);
         addQuizButton = findViewById(R.id.add_quiz_button);
         saveButton = findViewById(R.id.save_quizzes_button);
+        categorySpinner = findViewById(R.id.spinner_categ_edit_deck);
 
         setUpView();
 
@@ -121,6 +126,7 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
             @Override
             public void onClick(View view) {
                 deck.setTitle(deckTitle.getText().toString());
+                Log.d("_TAG","Deck category is: "+deck.getCategory());
                 mDeckService.updateDeck(deck);
                 finish();
             }
@@ -157,6 +163,31 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
                 Intent intent = new Intent(getBaseContext(), AddQuizActivity.class);
                 //intent.putExtra(getString(R.string.DECK_KEY), deck);
                 my_startActivityForResultAddQuiz.launch(intent);
+            }
+        });
+
+        //ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.categs_array, android.R.layout.simple_spinner_item);
+
+        categorySpinner.setAdapter(spinnerAdapter);
+
+        for (int i=0; i<spinnerAdapter.getCount(); i++){
+            if (spinnerAdapter.getItem(i).toString().equals(deck.getCategory())){
+                categorySpinner.setSelection(i);
+            }
+        }
+
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("_TAG","Category: "+adapterView.getItemAtPosition(i).toString());
+                deck.setCategory(adapterView.getItemAtPosition(i).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }

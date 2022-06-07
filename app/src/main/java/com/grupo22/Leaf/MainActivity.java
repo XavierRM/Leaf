@@ -15,10 +15,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +54,12 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
     EditText etTitle;
 
+    Spinner categorySpinner;
+
+    Button butSearch;
+
+    ArrayAdapter<CharSequence> spinnerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         createDeckBut = findViewById(R.id.create_deck_but);
         userDecksSwitch = findViewById(R.id.sw_decks);
         etTitle = findViewById(R.id.et_search_title);
+        categorySpinner = findViewById(R.id.spinner_categ_main);
+        butSearch = findViewById(R.id.but_search);
 
         //Log.d("_TAG","Button exists with text: "+createDeckBut.getText().toString());
 
@@ -111,6 +122,18 @@ public class MainActivity extends AppCompatActivity implements DecksView {
                 mPresenter.switchDecksChanged();
             }
         });
+
+        butSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.initFlow();
+            }
+        });
+
+        spinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.categs_array, android.R.layout.simple_spinner_item);
+
+        categorySpinner.setAdapter(spinnerAdapter);
     }
 
 
@@ -149,6 +172,11 @@ public class MainActivity extends AppCompatActivity implements DecksView {
     @Override
     public String getTitleValue(){
         return etTitle.getText().toString();
+    }
+
+    @Override
+    public String getCategory(){
+        return spinnerAdapter.getItem(categorySpinner.getSelectedItemPosition()).toString();
     }
 
     @Override

@@ -47,7 +47,7 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.DeckHolder> 
         }
         public void bind(DeckViewModel deckViewModel) {
             title.setText(deckViewModel.getTitle());
-            id.setText(deckViewModel.getId());
+            id.setText(deckViewModel.getCategory());
             editButton.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override

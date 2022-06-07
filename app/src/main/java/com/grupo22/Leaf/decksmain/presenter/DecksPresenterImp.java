@@ -61,6 +61,7 @@ public class DecksPresenterImp implements DecksPresenter {
         Log.d("_TAG",uid);
 
         String titleSearch = decksView.getTitleValue();
+        String category = decksView.getCategory();
 
         if(onlyUserDecks) {
             mUserService.getUser(uid, user -> {
@@ -68,7 +69,7 @@ public class DecksPresenterImp implements DecksPresenter {
                     //Temporal
                     List<Deck> newDecks = new ArrayList<Deck>();
                     for (Deck d : decks) {
-                        if (user.getUserDecks().contains(d.getId()) && d.getTitle().contains(titleSearch)) {
+                        if (user.getUserDecks().contains(d.getId()) && d.getTitle().contains(titleSearch) && (category.equals("None") || category.equals(d.getCategory()))) {
                             newDecks.add(d);
                         }
                     }
@@ -81,7 +82,7 @@ public class DecksPresenterImp implements DecksPresenter {
             mDeckService.searchDecks("", decks -> {
                 List<Deck> newDecks = new ArrayList<Deck>();
                 for (Deck d : decks) {
-                    if (d.getTitle().contains(titleSearch)) {
+                    if (d.getTitle().contains(titleSearch) && (category.equals("None") || category.equals(d.getCategory()))) {
                         newDecks.add(d);
                     }
                 }

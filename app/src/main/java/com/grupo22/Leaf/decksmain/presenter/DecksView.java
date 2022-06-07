@@ -17,4 +17,6 @@ public interface DecksView {
     void setLoadingIndicatorVisibility(boolean show);
 
     String getTitleValue();
+
+    String getCategory();
 }
