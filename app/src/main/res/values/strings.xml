@@ -18,4 +18,12 @@
     <string name="save_string">Save</string>
     <string name="add_quiz_text">Add Question</string>
     <string name="create_button_text">Create</string>
+    <string name="sw_mine">My decks</string>
+    <string name="sw_all">All decks</string>
+    <string name="tv_search_title">Search by tittle:</string>
+    <string name="et_title">Title</string>
+    <string name="et_categ">Category</string>
+    <string name="et_lang">Language</string>
+    <string name="tv_filter_by">Filter by:</string>
+    <string name="but_search">Search</string>
 </resources>

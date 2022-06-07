@@ -9,4 +9,6 @@ public interface DecksPresenter {
     void onClickDeck(DeckViewModel deck);
 
     void onClickCreate();
+
+    void switchDecksChanged();
 }

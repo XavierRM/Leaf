@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categs_array">
+        <item>None</item>
+        <item>Math</item>
+        <item>History</item>
+        <item>Science</item>
+        <item>Language</item>
+    </string-array>
+</resources>

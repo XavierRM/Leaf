@@ -19,12 +19,18 @@ import com.google.firebase.auth.FirebaseUser;
 
 import com.grupo22.Leaf.MainActivity;
 import com.grupo22.Leaf.R;
+import com.grupo22.Leaf.domain.user.User;
+import com.grupo22.Leaf.domain.user.service.UserService;
+import com.grupo22.Leaf.domain.user.service.UserServiceImp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class SessionActivity extends AppCompatActivity {
+    private UserService mService = new UserServiceImp();
+
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
             new FirebaseAuthUIActivityResultContract(),
             new ActivityResultCallback<FirebaseAuthUIAuthenticationResult>() {
@@ -65,6 +71,15 @@ public class SessionActivity extends AppCompatActivity {
         if (result.getResultCode() == RESULT_OK) {
             // Successfully signed in
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            mService.existsUser(user.getUid(),value ->{
+                if(!value){
+                    List<String> proba = new ArrayList<>();
+                    proba.add("-N2TkqrmoqfTgaC9yA_A");
+                    proba.add("-N2Tkrh7DuenYB_MJNbn");
+                    mService.createUser(new User(user.getUid(), "marti", proba));
+                }
+            });
 
             Intent intentShare = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intentShare);

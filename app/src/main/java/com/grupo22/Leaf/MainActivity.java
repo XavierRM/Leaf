@@ -15,8 +15,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +50,16 @@ public class MainActivity extends AppCompatActivity implements DecksView {
 
     Button createDeckBut;
 
+    Switch userDecksSwitch;
+
+    EditText etTitle;
+
+    Spinner categorySpinner;
+
+    Button butSearch;
+
+    ArrayAdapter<CharSequence> spinnerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         mRecycler = findViewById(R.id.decks_list);
         mEmptyView = findViewById(R.id.artists_empty_list);
         createDeckBut = findViewById(R.id.create_deck_but);
+        userDecksSwitch = findViewById(R.id.sw_decks);
+        etTitle = findViewById(R.id.et_search_title);
+        categorySpinner = findViewById(R.id.spinner_categ_main);
+        butSearch = findViewById(R.id.but_search);
 
         //Log.d("_TAG","Button exists with text: "+createDeckBut.getText().toString());
 
@@ -95,7 +115,28 @@ public class MainActivity extends AppCompatActivity implements DecksView {
                 mPresenter.onClickCreate();
             }
         });
+
+        userDecksSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mPresenter.switchDecksChanged();
+            }
+        });
+
+        butSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.initFlow();
+            }
+        });
+
+        spinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.categs_array, android.R.layout.simple_spinner_item);
+
+        categorySpinner.setAdapter(spinnerAdapter);
     }
+
+
 
     @Override
     public void showDecks(List<DeckViewModel> decks) {
@@ -126,6 +167,16 @@ public class MainActivity extends AppCompatActivity implements DecksView {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    public String getTitleValue(){
+        return etTitle.getText().toString();
+    }
+
+    @Override
+    public String getCategory(){
+        return spinnerAdapter.getItem(categorySpinner.getSelectedItemPosition()).toString();
     }
 
     @Override

@@ -7,17 +7,61 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/create_deck_but"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_button_text"
-        />
+        android:text="@string/tv_filter_by"
+        >
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/et_title"
+        ></TextView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_title"
+        android:id="@+id/et_search_title"
+        ></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/et_categ"
+        >
+    </TextView>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_categ_main"
+        ></Spinner>
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sw_decks"
+        android:textOff="@string/sw_mine"
+        android:textOn="@string/sw_all"
+        android:showText="true"
+        >
+    </Switch>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/but_search"
+        android:id="@+id/but_search"
+        ></Button>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="2">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/decks_list"
@@ -25,6 +69,13 @@
             android:layout_width="match_parent"
             android:visibility="visible"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <Button
+        android:id="@+id/create_deck_but"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/create_button_text"
+        />
 
     <TextView
         android:id="@+id/artists_empty_list"

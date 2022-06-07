@@ -3,10 +3,12 @@ package com.grupo22.Leaf.decksmain.presenter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.grupo22.Leaf.MainActivity;
 import com.grupo22.Leaf.R;
 import com.grupo22.Leaf.domain.deck.Deck;
@@ -16,6 +18,8 @@ import com.grupo22.Leaf.domain.deck.service.DeckServiceImp;
 import com.grupo22.Leaf.decksmain.viewmodel.DeckViewModel;
 import com.grupo22.Leaf.decksmain.viewmodel.DecksViewModelMapper;
 import com.grupo22.Leaf.domain.quiz.Quiz;
+import com.grupo22.Leaf.domain.user.service.UserService;
+import com.grupo22.Leaf.domain.user.service.UserServiceImp;
 import com.grupo22.Leaf.edit.ListQuizActivity;
 
 import java.util.ArrayList;
@@ -28,6 +32,12 @@ public class DecksPresenterImp implements DecksPresenter {
     private List<DeckViewModel> mDecksViewModels;
 
     private DeckService mDeckService = new DeckServiceImp();
+
+    private UserService mUserService = new UserServiceImp();
+
+    String uid = FirebaseAuth.getInstance().getUid();
+
+    private boolean onlyUserDecks = true;
 
     public DecksPresenterImp(DecksView view) {
 
@@ -48,11 +58,39 @@ public class DecksPresenterImp implements DecksPresenter {
 
         decksView.setLoadingIndicatorVisibility(true);
 
-        mDeckService.searchDecks("", decks -> {
-            decksView.setLoadingIndicatorVisibility(false);
-            mDecksViewModels = getDecksViewModel(decks);
-            decksView.showDecks(mDecksViewModels);
-        });
+        Log.d("_TAG",uid);
+
+        String titleSearch = decksView.getTitleValue();
+        String category = decksView.getCategory();
+
+        if(onlyUserDecks) {
+            mUserService.getUser(uid, user -> {
+                mDeckService.searchDecks("", decks -> {
+                    //Temporal
+                    List<Deck> newDecks = new ArrayList<Deck>();
+                    for (Deck d : decks) {
+                        if (user.getUserDecks().contains(d.getId()) && d.getTitle().contains(titleSearch) && (category.equals("None") || category.equals(d.getCategory()))) {
+                            newDecks.add(d);
+                        }
+                    }
+                    decksView.setLoadingIndicatorVisibility(false);
+                    mDecksViewModels = getDecksViewModel(newDecks);
+                    decksView.showDecks(mDecksViewModels);
+                });
+            });
+        }else{
+            mDeckService.searchDecks("", decks -> {
+                List<Deck> newDecks = new ArrayList<Deck>();
+                for (Deck d : decks) {
+                    if (d.getTitle().contains(titleSearch) && (category.equals("None") || category.equals(d.getCategory()))) {
+                        newDecks.add(d);
+                    }
+                }
+                decksView.setLoadingIndicatorVisibility(false);
+                mDecksViewModels = getDecksViewModel(newDecks);
+                decksView.showDecks(mDecksViewModels);
+            });
+        }
     }
 
     @Override
@@ -63,13 +101,27 @@ public class DecksPresenterImp implements DecksPresenter {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClickCreate(){
-        Deck emptyDeck = new Deck("","none","es",new ArrayList<Quiz>());
+        Deck emptyDeck = new Deck("deffault","none","es",new ArrayList<Quiz>());
         String key = mDeckService.createDeck(emptyDeck);
         emptyDeck.setId(key);
+
+        mUserService.getUser(uid, user->{
+            List<String> decks= user.getUserDecks();
+            decks.add(key);
+            user.setUserDecks(decks);
+            mUserService.updateUser(user);
+        });
 
         Intent intentShare = new Intent((Context) decksView, ListQuizActivity.class);
         intentShare.putExtra(((Context) decksView).getString(R.string.DECK_KEY), emptyDeck);
         ((Context) decksView).startActivity(intentShare);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void switchDecksChanged() {
+        this.onlyUserDecks=!this.onlyUserDecks;
+        initFlow();
     }
 
 

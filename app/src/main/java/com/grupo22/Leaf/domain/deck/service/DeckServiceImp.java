@@ -18,8 +18,8 @@ public class DeckServiceImp implements DeckService {
 
     @Override
     public String createDeck(Deck deck) {
-        mDatasource.createDeck(deck);
-        return null;
+        String key = mDatasource.createDeck(deck);
+        return key;
     }
 
     @Override
