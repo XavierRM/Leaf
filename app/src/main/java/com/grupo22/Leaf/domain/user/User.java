@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class User {
     private String userId;
     private String name;
-    private List<String> userDecks;
+    private List<String> userDecks = new ArrayList<>();
 
     public User(){
 

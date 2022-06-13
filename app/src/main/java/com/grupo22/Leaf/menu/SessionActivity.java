@@ -76,7 +76,7 @@ public class SessionActivity extends AppCompatActivity {
             mService.existsUser(user.getUid(),value ->{
                 if(!value){
                     List<String> proba = new ArrayList<>();
-                    mService.createUser(new User(user.getUid(), "", proba));
+                    mService.createUser(new User(user.getUid(), "", null));
                 }
             });
 
