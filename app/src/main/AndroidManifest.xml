@@ -19,13 +19,13 @@
             android:name=".edit.ListQuizActivity"
             android:exported="false" />
         <activity
-            android:name=".menu.SessionActivity"
-            android:exported="false" />
-        <activity
             android:name=".quizgame.GameActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".menu.SessionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
