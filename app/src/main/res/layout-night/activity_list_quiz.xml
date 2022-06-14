@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:orientation="vertical"
-    >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tv_filter_by"
-        >
-    </TextView>
+    tools:context=".edit.ListQuizActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -24,67 +15,76 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/et_title"
-        android:id="@+id/et_search_title"
+        android:id="@+id/edit_deck_title_et"
+        android:hint="@string/et_title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/et_lang"
+        ></TextView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_lang"
+        android:id="@+id/edit_deck_et_lang"
         ></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/et_categ"
-        >
-    </TextView>
+        ></TextView>
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner_categ_main"
+        android:id="@+id/spinner_categ_edit_deck"
+        android:spinnerMode="dropdown"
         ></Spinner>
-
-    <Switch
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sw_decks"
-        android:textOff="@string/sw_mine"
-        android:textOn="@string/sw_all"
-        android:showText="true"
-        >
-    </Switch>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/but_search"
-        android:id="@+id/but_search"
-        ></Button>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="2">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/decks_list"
+            android:id="@+id/quizzes_list"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:visibility="visible"/>
+            android:visibility="visible" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <Button
-        android:id="@+id/create_deck_but"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/create_button_text"
-        />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="5">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/add_quiz_button"
+            android:text="@string/add_quiz_text"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/save_quizzes_button"
+            android:text="@string/save_string"/>
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/artists_empty_list"
+        android:id="@+id/quizzes_empty_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:textSize="24sp"
         android:visibility="gone"
-        tools:text="No hay resultados" />
+        tools:text="No hay resultados"/>
 
 </LinearLayout>
