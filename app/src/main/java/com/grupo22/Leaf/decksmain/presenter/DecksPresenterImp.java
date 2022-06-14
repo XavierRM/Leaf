@@ -101,7 +101,7 @@ public class DecksPresenterImp implements DecksPresenter {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClickCreate(){
-        Deck emptyDeck = new Deck("deffault","none","es",new ArrayList<Quiz>());
+        Deck emptyDeck = new Deck("default","none","es",new ArrayList<Quiz>());
         String key = mDeckService.createDeck(emptyDeck);
         emptyDeck.setId(key);
 
