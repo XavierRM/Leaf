@@ -41,6 +41,7 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
     RecyclerView mRecycler;
     TextView mEmptyView;
     EditText deckTitle;
+    EditText etLang;
     Button addQuizButton, saveButton;
     Deck deck;
     Spinner categorySpinner;
@@ -112,6 +113,7 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
         addQuizButton = findViewById(R.id.add_quiz_button);
         saveButton = findViewById(R.id.save_quizzes_button);
         categorySpinner = findViewById(R.id.spinner_categ_edit_deck);
+        etLang = findViewById(R.id.edit_deck_et_lang);
 
         setUpView();
 
@@ -126,6 +128,7 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
             @Override
             public void onClick(View view) {
                 deck.setTitle(deckTitle.getText().toString());
+                deck.setLang(etLang.getText().toString());
                 Log.d("_TAG","Deck category is: "+deck.getCategory());
                 mDeckService.updateDeck(deck);
                 finish();
@@ -133,6 +136,8 @@ public class ListQuizActivity extends AppCompatActivity implements QuizzesView {
         });
 
         deckTitle.setText(deck.getTitle());
+
+        etLang.setText(deck.getLang());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(linearLayoutManager);

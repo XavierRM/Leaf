@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_icon_leaf"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/app_icon_leaf_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Leaf">
         <activity
@@ -19,13 +19,13 @@
             android:name=".edit.ListQuizActivity"
             android:exported="false" />
         <activity
-            android:name=".menu.SessionActivity"
-            android:exported="false" />
-        <activity
             android:name=".quizgame.GameActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".menu.SessionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

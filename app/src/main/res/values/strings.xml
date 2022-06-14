@@ -2,8 +2,9 @@
     <string name="app_name">Leaf</string>
 
     <string name="general_error">Ups, something happened</string>
-    <string name="registry_string">Register</string>
+    <string name="registry_string">Change account</string>
     <string name="settings_string">Settings</string>
+    <string name="settings_notice_string">You can modify dark mode and language settings (EN or ES) in system settings</string>
     <string name="save_session_string">Save</string>
     <string name="email_string">Email</string>
     <string name="password_string">Password</string>
@@ -11,7 +12,7 @@
     <string name="decks_number">Decks number</string>
     <string name="error_general">Ups, an error has occurred</string>
     <string name="hit">Congratulations, you guessed correctly!</string>
-    <string name="miss">You missed, try again</string>
+    <string name="miss">Sorry, you missed</string>
     <string name="check_answer">Check</string>
     <string name="DECK_KEY">DECK_KEY</string>
     <string name="QUIZ_KEY">QUIZ_KEY</string>
@@ -26,4 +27,6 @@
     <string name="et_lang">Language</string>
     <string name="tv_filter_by">Filter by:</string>
     <string name="but_search">Search</string>
+    <string name="game_over">Game over!</string>
+    <string name="game_over_summary">"You guessed correctly "</string>
 </resources>

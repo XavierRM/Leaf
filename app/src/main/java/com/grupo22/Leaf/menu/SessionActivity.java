@@ -2,6 +2,7 @@ package com.grupo22.Leaf.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -60,7 +61,7 @@ public class SessionActivity extends AppCompatActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setIsSmartLockEnabled(false)
-                //.setLogo(R.drawable.)
+                .setLogo(R.drawable.ic_leaf)
                 .setAvailableProviders(providers)
                 .build();
         signInLauncher.launch(signInIntent);
@@ -75,22 +76,14 @@ public class SessionActivity extends AppCompatActivity {
             mService.existsUser(user.getUid(),value ->{
                 if(!value){
                     List<String> proba = new ArrayList<>();
-                    proba.add("-N2TkqrmoqfTgaC9yA_A");
-                    proba.add("-N2Tkrh7DuenYB_MJNbn");
-                    mService.createUser(new User(user.getUid(), "marti", proba));
+                    mService.createUser(new User(user.getUid(), "", null));
                 }
             });
 
             Intent intentShare = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intentShare);
-            // ...
         } else {
-            // Sign in failed. If response is null the user canceled the
-            // sign-in flow using the back button. Otherwise check
-            // response.getError().getErrorCode() and handle the error.
-            // ...
-
-            // Start main activity
+            Log.e("SessionActivity", "Sign in failed");
         }
     }
 }

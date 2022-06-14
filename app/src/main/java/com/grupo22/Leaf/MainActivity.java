@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements DecksView {
                 startActivity(intentSession);
                 return true;
             case R.id.settings_menu_item:
-                Toast.makeText(this, R.string.settings_string, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.settings_notice_string, Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

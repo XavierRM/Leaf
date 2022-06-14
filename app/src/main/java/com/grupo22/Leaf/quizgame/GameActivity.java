@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -135,7 +135,14 @@ public class GameActivity extends AppCompatActivity implements GameView {
     }
 
     @Override
-    public void showEndScreen() {
-        Log.d("END", "END");
+    public void showEndScreen(int hits, int misses) {
+        Toast.makeText(getApplicationContext(), getString(R.string.game_over), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.game_over_summary) + hits + "/" + (hits + misses), Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 6500);
     }
 }
