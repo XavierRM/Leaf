@@ -42,6 +42,8 @@ public class GamePresenterImp implements GamePresenter {
 
     @Override
     public void onCheckClick() {
+        if (mCurrentQuiz >= mQuizzesViewModels.size())
+            return;
         QuizViewModel currentQuiz = mQuizzesViewModels.get(mCurrentQuiz);
         if (currentQuiz.getRightAnswer() == mSelectedAnswer) {
             ++hits;
